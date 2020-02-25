@@ -11,33 +11,8 @@
 	<title>Admin Dashboard</title>
 	<!-- CSS -->
 	<link rel="stylesheet" href="{{ asset('Back/')}}assets/css/app.css">
-	<style>
-		.loader {
-			position: fixed;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			background-color: #F5F8FA;
-			z-index: 9998;
-			text-align: center;
-		}
-
-		.plane-container {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-		}
-	</style>
-	<!-- Js -->
-	<!--
-    --- Head Part - Use Jquery anywhere at page.
-    --- http://writing.colin-gourlay.com/safely-using-ready-before-including-jquery/
-    -->
-	<script>(function(w,d,u){w.readyQ=[];w.bindReadyQ=[];function p(x,y){if(x=="ready"){w.bindReadyQ.push(y);}else{w.readyQ.push(x);}};var a={ready:p,bind:p};w.$=w.jQuery=function(f){if(f===d||f===u){return a}else{p(f)}}})(window,document)</script>
 </head>
 <body class="light">
-<!-- Pre loader -->
 <div id="app">
 	<aside class="main-sidebar fixed offcanvas shadow" data-toggle='offcanvas'>
 		<section class="sidebar">
@@ -117,6 +92,9 @@
 					</li>
 					<li><a href="{{ path('add_location_products')}}"><i class="icon icon-add"></i>Add Location</a>
 					</li>
+
+					<li><a href="{{ path('affichecontract')}}"><i class="icon icon-add"></i>Pending Contract</a>
+					</li>
 				</ul>
 				</li>
 
@@ -164,10 +142,10 @@
 				</li>
 
 
-				content
+
 				<li class="treeview">
 					<a href="{{ asset('Back/')}} #">
-						<i class="icon icon-goals-1 amber-text s-18"></i> <span>Elements</span>
+						<i class="icon icon-goals-1 amber-text s-18"></i> <span>Orders</span>
 						<i class="icon icon-angle-left s-18 pull-right"></i>
 					</a>
 					<ul class="treeview-menu">
@@ -207,52 +185,7 @@
 								<span>Preloaders</span></a></li>
 					</ul>
 				</li>
-				<li class="treeview ">
-					<a href="{{ asset('Back/')}} #">
-						<i class="icon icon-wpforms light-green-text s-18 "></i> <span>Forms & Plugins</span>
-						<i class="icon icon-angle-left s-18 pull-right"></i>
-					</a>
-					<ul class="treeview-menu">
-						<li><a href="{{ asset('Back/')}} panel-element-forms.html"><i class="icon icon-wpforms light-green-text"></i>Bootstrap
-								Inputs</a>
-						</li>
-						<li><a href="{{ asset('Back/')}} form-jquery-validations.html"><i class="icon icon-note-important light-green-text"></i>
-								Form Validation (Jquery)</a>
-						</li>
-						<li><a href="{{ asset('Back/')}} form-bootstrap-validations.html"><i class="icon icon-note-important light-green-text"></i>
-								Form Validation (Bootstrap)</a>
-						</li>
-						<li><a href="{{ asset('Back/')}} panel-element-editor.html"><i class="icon icon-pen2 light-green-text"></i>Editor</a>
-						</li>
-						<li><a href="{{ asset('Back/')}} panel-element-toast.html"><i
-										class="icon icon-notifications_active light-green-text"></i>Toasts</a>
-						</li>
-						<li><a href="{{ asset('Back/')}} panel-element-stepper.html"><i class="icon icon-burst_mode light-green-text"></i>Stepper</a>
-						</li>
-						<li><a href="{{ asset('Back/')}} panel-element-date-time-picker.html"><i
-										class="icon icon-date_range light-green-text"></i>Date Time Picker</a>
-						</li>
-						<li><a href="{{ asset('Back/')}} panel-element-color-picker.html"><i class="icon icon-adjust light-green-text"></i>Color
-								Picker</a>
-						</li>
-						<li><a href="{{ asset('Back/')}} panel-element-range-slider.html"><i class="icon icon-space_bar light-green-text"></i>Range
-								Slider</a>
-						</li>
-						<li><a href="{{ asset('Back/')}} panel-element-select2.html"><i
-										class="icon  icon-one-finger-click light-green-text"></i>Select 2</a>
-						</li>
-						<li><a href="{{ asset('Back/')}} panel-element-tags.html"><i class="icon  icon-tags3 light-green-text"></i>Tags</a>
-						</li>
-						<li><a href="{{ asset('Back/')}} panel-element-data-tables.html"><i class="icon icon-table light-green-text"></i>Data
-								Tables</a>
-						</li>
-					</ul>
-				</li>
-				<li class="treeview"><a href="{{ asset('Back/')}} #">
-						<i class="icon icon-bar-chart2 pink-text s-18"></i>
-						<span>Charts</span>
-						<i class="icon icon-angle-left s-18 pull-right"></i>
-					</a>
+
 					<ul class="treeview-menu">
 						<li>
 							<a href="{{ asset('Back/')}} panel-element-charts-js.html"><i class="icon icon-area-chart pink-text s-14"></i><span>Charts.Js</span></a>
@@ -283,11 +216,6 @@
 						</li>
 					</ul>
 				</li>
-				<li class="treeview"><a href="{{ asset('Back/')}} #">
-						<i class="icon icon-dialpad blue-text  s-18"></i>
-						<span>Extra</span>
-						<i class="icon icon-angle-left s-18 pull-right"></i>
-					</a>
 					<ul class="treeview-menu">
 						<li>
 							<a href="{{ asset('Back/')}} panel-element-letters.html">

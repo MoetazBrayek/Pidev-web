@@ -14,7 +14,11 @@
     </div>
 </div>
 <!--// Breadcrumb Area -->
-
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+{% endfor %}
 
 <!-- Page Content -->
 <main class="page-content">
@@ -26,6 +30,7 @@
 
                 <div class="col-lg-6">
                     <form action="#" class="tm-form tm-login-form">
+
                         <h4>Login</h4>
                         <div class="tm-form-inner">
                             <div class="tm-form-field">

@@ -9,7 +9,7 @@
         <div class="tm-breadcrumb">
             <h2>Contact With Us</h2>
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="{{ path('homepage') }}">Home</a></li>
                 <li>Contact</li>
             </ul>
         </div>
@@ -29,6 +29,8 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="tm-contact">
+
+
                         <h2>Send us a message</h2>
                         {{ form_start(form) }}
                         <form id="tm-contactform" action="http://thememarch.com/demo/html/malic/malic/assets/php/mailer.php"
@@ -56,9 +58,20 @@
                                     {{form_widget(form.message|raw)}}
                                 </div>
                                 <div class="tm-form-field">
-
+{% if app.user %}
                                     <button type="submit" class="tm-button tm-button-block">Send
                                         Message</button>
+                                    {% else %}
+
+                                        <div class="alert alert-info">
+                                            <strong>Info!</strong> You Need To Connect , To Be ABle To Send A Message.
+                                        </div>
+                                        <br>
+                                        <div class="alert alert-success">
+    <a href="{{ path('fos_user_security_login') }}">Login/Register</a>
+
+                                        </div>
+{% endif %}
 
                                 </div>
                             </div>

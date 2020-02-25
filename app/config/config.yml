@@ -139,3 +139,13 @@ vich_uploader:
             uri_prefix: /uploads/
             upload_destination: '%kernel.root_dir%/../web/uploads/'
             namer: vich_uploader.namer_uniqid
+notifications:
+    app_id:     952182
+    app_key:    00dcbcf3cd81d0ee7293
+    app_secret: 4b6e0f2bd840891d4e92
+    cluster:    "eu"
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
+        options:    []

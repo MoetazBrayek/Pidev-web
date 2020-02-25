@@ -247,6 +247,11 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                     return $this->mergeDefaults(array_replace($matches, ['_route' => 'acceptblog']), array (  '_controller' => 'AdminBundle\\Controller\\DefaultController::acceptblogAction',));
                 }
 
+                // affichecontract
+                if ('/Admin/affichecontract' === $pathinfo) {
+                    return array (  '_controller' => 'AdminBundle\\Controller\\DefaultController::AfficherContractAction',  '_route' => 'affichecontract',);
+                }
+
             }
 
             // editProdct
@@ -267,6 +272,16 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             // reply
             if (0 === strpos($pathinfo, '/Admin/reply') && preg_match('#^/Admin/reply/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
                 return $this->mergeDefaults(array_replace($matches, ['_route' => 'reply']), array (  '_controller' => 'AdminBundle\\Controller\\SendController::createAction',));
+            }
+
+            // sentiments
+            if (0 === strpos($pathinfo, '/Admin/sentiments') && preg_match('#^/Admin/sentiments/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, ['_route' => 'sentiments']), array (  '_controller' => 'AdminBundle\\Controller\\SentimentController::SentimentAction',));
+            }
+
+            // confirmcontrat
+            if (0 === strpos($pathinfo, '/Admin/confirmcontrat') && preg_match('#^/Admin/confirmcontrat/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, ['_route' => 'confirmcontrat']), array (  '_controller' => 'AdminBundle\\Controller\\DefaultController::ConfirmContractAction',));
             }
 
         }
@@ -411,6 +426,16 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                 // editLocation
                 if (0 === strpos($pathinfo, '/location/editLocation') && preg_match('#^/location/editLocation/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
                     return $this->mergeDefaults(array_replace($matches, ['_route' => 'editLocation']), array (  '_controller' => 'LocationBundle\\Controller\\DefaultController::editAction',));
+                }
+
+                // localate
+                if (0 === strpos($pathinfo, '/location/localate') && preg_match('#^/location/localate/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, ['_route' => 'localate']), array (  '_controller' => 'LocationBundle\\Controller\\DefaultController::louerAction',));
+                }
+
+                // mylocation
+                if ('/location/mylocation' === $pathinfo) {
+                    return array (  '_controller' => 'LocationBundle\\Controller\\DefaultController::checkoutAction',  '_route' => 'mylocation',);
                 }
 
             }
@@ -634,6 +659,31 @@ class appDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             not_addblog:
 
         }
+
+        elseif (0 === strpos($pathinfo, '/qrcode')) {
+            // endroid_qrcode_generate
+            if (preg_match('#^/qrcode/(?P<text>[\\w\\W]+)\\.(?P<extension>[^/]++)$#sD', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, ['_route' => 'endroid_qrcode_generate']), array (  '_controller' => 'Endroid\\QrCode\\Bundle\\QrCodeBundle\\Controller\\QrCodeController::generateAction',));
+            }
+
+            // endroid_qrcode_twig_functions
+            if ('/qrcode/twig' === $pathinfo) {
+                return array (  '_controller' => 'Endroid\\QrCode\\Bundle\\QrCodeBundle\\Controller\\QrCodeController::twigFunctionsAction',  '_route' => 'endroid_qrcode_twig_functions',);
+            }
+
+        }
+
+        // fos_js_routing_js
+        if (0 === strpos($pathinfo, '/js/routing') && preg_match('#^/js/routing(?:\\.(?P<_format>js|json))?$#sD', $pathinfo, $matches)) {
+            $ret = $this->mergeDefaults(array_replace($matches, ['_route' => 'fos_js_routing_js']), array (  '_controller' => 'fos_js_routing.controller:indexAction',  '_format' => 'js',));
+            if (!in_array($canonicalMethod, ['GET'])) {
+                $allow = array_merge($allow, ['GET']);
+                goto not_fos_js_routing_js;
+            }
+
+            return $ret;
+        }
+        not_fos_js_routing_js:
 
         if ('/' === $pathinfo && !$allow) {
             throw new Symfony\Component\Routing\Exception\NoConfigurationException();

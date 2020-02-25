@@ -4,6 +4,26 @@
 
 <!-- Mirrored from thememarch.com/demo/html/malic/malic/login-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Jan 2020 19:44:34 GMT -->
 <head>
+    {# Call NotificationsBundles's assets #}
+    {{ notifications_assets() }}
+    <script>
+        /**
+         * After calling notifications_assets() "pusher" is now available
+         * and you can use it this way
+         */
+
+            // select the channel you want to listen to
+        var channel = pusher.subscribe("notifications");// notifications channel
+        channel.bind("my-event", function(data) {
+            console.log('from notifications channel', data);
+        });
+
+        var channel = pusher.subscribe("messages");// messages channel
+        channel.bind("my-event", function(data) {
+            console.log('from messages channel', data);
+        });
+    </script>
+
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>HuntKingdom - Fishing & Hunting Club HTML Template</title>
@@ -114,9 +134,19 @@
                                 </ul>
                             </li>
                             <li><a href="{{ path('contact') }}">Contact</a></li>
-                            <li><a href="{{ path('location_homepage') }}">Location</a></li>
-                            {% if app.user %}
-                            <a href="{{ path('location_homepage') }}"> </a><li class="icon-shopping-basket2">My Orders</li>
+                            <li class="tm-header-nav-dropdown"><a href="">Location</a>
+                                <ul>
+                                    {% if app.user %}
+                                        <li><a href="{{ path('mylocation') }}">My Locations</a></li>
+                                    {% endif %}
+                                </ul>
+                            </li>                            {% if app.user %}
+                                <li class="tm-header-nav-dropdown"><a href="#">My Orders</a>
+                                    <ul>
+                                        <li><a href="{{ path('blog_homepage') }}">My Orders</a></li>
+
+                                    </ul>
+                                </li>
                             {% endif %}
                             </li>
                             </li>

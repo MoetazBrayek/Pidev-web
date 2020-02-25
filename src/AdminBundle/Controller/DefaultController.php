@@ -12,9 +12,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-
+use Twilio\Exceptions\TwilioException;
+use Twilio\Rest\Client;
 
 
 class DefaultController extends Controller
@@ -121,7 +123,63 @@ class DefaultController extends Controller
         ));
 
     }
-    public function StatusAction($id){
+    public function AfficherContractAction(Request $request){
+
+        $allcontract = $this->getDoctrine()
+            ->getRepository('LocationBundle:Contract')
+            ->findAll();
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $allcontract,
+            $request->query->getInt('page', 1)/*page number*/,
+            3/*limit per page*/
+        );
+        return $this->render('AdminBundle:Default:Contract.html.twig', array(
+
+            'blogs'=>$pagination
+        ));
+
+    }
+
+    public function ConfirmContractAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $todos = $this->getDoctrine()
+            ->getRepository('LocationBundle:Contract')
+            ->find($id);
+        $todos2 = $this->getDoctrine()
+            ->getRepository('LocationBundle:Location')
+            ->find($id);
+        $todos->setAcceptcontract('1');
+        $em->persist($todos);
+        $em->flush();
+
+
+
+        $account_sid = 'AC7c27b5ff7f1814c0e28ba26a431b376d';
+        $auth_token = '2fb29e88f4b292b2d4308928cf316aab';
+        $twilio_number = "+16084722458";
+        $client = new Client($account_sid, $auth_token);
+        try {
+            $client->messages->create(
+            // Where to send a text message (your cell phone?)
+                '+21658804719',
+                array(
+                    'from' => $twilio_number,
+                    'body' => 'Your Contract Id : '.$todos->getId().'Confirmed Matricule :'.$todos2->getMatricule())
+            );
+        } catch (TwilioException $e) {
+            echo ('error');
+        } catch (TwilioException $e) {
+            echo ('error');
+
+        }
+
+        return $this->redirectToRoute('affichecontract');
+
+    }
+        public function StatusAction($id){
         $em = $this->getDoctrine()->getManager();
 
         $todos = $this->getDoctrine()
@@ -143,17 +201,58 @@ class DefaultController extends Controller
 
 
     public function MsgDetaisAction($id, Request $request){
+
+        $subscription_key = "7b565b621d7a47bdb1fcf4cf2389b4fb";
+        $endpoint = "https://centralus.api.cognitive.microsoft.com/text/analytics/v2.1/sentiment";
+
         $msg = $this->getDoctrine()
             ->getRepository('ContacusBundle:Contact')
             ->find($id);
 
+        $data = array (
 
+            'documents' => array (
+                array ( 'id' => '1', 'language' => 'en', 'text' => $msg->getMessage()),
+            )
+        );
+
+        $result = $this->GetSentiment($endpoint, $subscription_key, $data);
+            $x = json_decode($result, true);
         return $this->render('AdminBundle:Default:inboxdetais.html.twig', array(
 
-            'msgdtais'=>$msg
+            'msgdtais'=>$msg,
+            'score' =>  $x["documents"][0]["score"]
         ));
 
     }
+
+    function GetSentiment ($host, $key, $data) {
+        // Make sure all text is UTF-8 encoded.
+        foreach ($data as &$item) {
+            foreach ($item as $ignore => &$value) {
+                $value['text'] = utf8_encode($value['text']);
+            }
+        }
+        $data = json_encode ($data);
+        $headers = "Content-type: text/json\r\n" .
+            "Content-Length: " . strlen($data) . "\r\n" .
+            "Ocp-Apim-Subscription-Key: $key\r\n";
+        $options = array (
+            'http' => array (
+                'header' => $headers,
+                'method' => 'POST',
+                'content' => $data
+            )
+        );
+        $context  = stream_context_create ($options);
+        $result = file_get_contents ($host , false, $context);
+        return $result;
+    }
+
+
+
+
+
     public function edit_profileAction(){
         return $this->render('AdminBundle:Default:edit_profile.html.twig');
 
@@ -330,6 +429,7 @@ class DefaultController extends Controller
         $produit = $this->getDoctrine()
             ->getRepository('ShopBundle:Produit')
             ->find($id);
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
 
         $produit->setNom($produit->getNom());
         $produit->setDescription($produit->getDescription());
@@ -342,6 +442,7 @@ class DefaultController extends Controller
             ->add('nom', TextType::class, array('attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
             ->add('description', TextareaType::class, array('attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
             ->add('quantity', NumberType::class, array('attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
+
             ->add('prix', NumberType::class, array('attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
             ->add('category', EntityType::class, [
                 // looks for choices from this entity
@@ -355,19 +456,16 @@ class DefaultController extends Controller
 
             $nom = $form['nom']->getData();
             $description = $form['description']->getData();
-            $stock = $form['quantity']->getData();
+            $quantity = $form['quantity']->getData();
             $prix = $form['prix']->getData();
             $cat = $form['category']->getData();
-            $now = new\DateTime('now');
 
             $produit->setNom($nom);
             $produit->setDescription($description);
-            $produit->setQuantity($stock);
+            $produit->setQuantity($quantity);
             $produit->setPrix($prix);
-            $produit->setUtilisateur($user);
+            $produit->setUser($user);
             $produit->setCategory($cat);
-            $produit->setStars(0);
-            $produit->setDate($now);
 
             $sn = $this->getDoctrine()->getManager();
             $sn->persist($produit);

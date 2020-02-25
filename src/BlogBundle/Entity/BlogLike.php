@@ -28,28 +28,6 @@ class BlogLike
      */
     private $user;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="acceptlike", type="boolean")
-     */
-    private $acceptlike;
-
-    /**
-     * @return bool
-     */
-    public function isAcceptlike()
-    {
-        return $this->acceptlike;
-    }
-
-    /**
-     * @param bool $acceptlike
-     */
-    public function setAcceptlike($acceptlike)
-    {
-        $this->acceptlike = $acceptlike;
-    }
 
 
 

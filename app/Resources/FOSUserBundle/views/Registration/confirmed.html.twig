@@ -1,10 +1,33 @@
-{% extends "@FOSUser/layout.html.twig" %}
+{% extends "base.html.twig" %}
+{% block content %}
+    <!-- Breadcrumb Area -->
+    <div class="tm-breadcrumb-area tm-padding-section bg-grey" data-bgimage="assets/images/breadcrumb-bg.jpg"
+         data-white-overlay="2">
+        <div class="container">
+            <div class="tm-breadcrumb">
+                <ul>
+                    <img src="{{ asset('fish.png') }}" width="200" height="200">
+                </ul>
+            </div>
+        </div>
+    </div>
 
-{% trans_default_domain 'FOSUserBundle' %}
+    <br>
+    <br>
+    <br>
+    <div class="alert alert-success">
+        <strong>Success!</strong> Registred. You will be redirected in 3 seconds
+        <script>
+            var timer = setTimeout(function() {
+                window.location='{{ path('homepage')}}'
+            }, 3000);
+        </script>
 
-{% block fos_user_content %}
-    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
-    {% if targetUrl %}
-    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
-    {% endif %}
-{% endblock fos_user_content %}
+
+    </div>
+
+    <br>
+    <br><br><br><br><br><br><br><br><br><br><br>
+
+
+{% endblock %}

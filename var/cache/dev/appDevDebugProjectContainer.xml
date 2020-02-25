@@ -27,6 +27,14 @@
       <parameter key="NomayaSocialBundle">Nomaya\SocialBundle\NomayaSocialBundle</parameter>
       <parameter key="ContacusBundle">ContacusBundle\ContacusBundle</parameter>
       <parameter key="LocationBundle">LocationBundle\LocationBundle</parameter>
+      <parameter key="SkiesQRcodeBundle">Skies\QRcodeBundle\SkiesQRcodeBundle</parameter>
+      <parameter key="KnpSnappyBundle">Knp\Bundle\SnappyBundle\KnpSnappyBundle</parameter>
+      <parameter key="NotificationsBundle">SBC\NotificationsBundle\NotificationsBundle</parameter>
+      <parameter key="EndroidQrCodeBundle">Endroid\QrCode\Bundle\QrCodeBundle\EndroidQrCodeBundle</parameter>
+      <parameter key="FOSJsRoutingBundle">FOS\JsRoutingBundle\FOSJsRoutingBundle</parameter>
+      <parameter key="ADesignsCalendarBundle">ADesigns\CalendarBundle\ADesignsCalendarBundle</parameter>
+      <parameter key="FullCalendarBundle">AncaRebeca\FullCalendarBundle\FullCalendarBundle</parameter>
+      <parameter key="GregwarCaptchaBundle">Gregwar\CaptchaBundle\GregwarCaptchaBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -123,6 +131,46 @@
         <parameter key="parent">null</parameter>
         <parameter key="path">C:\xampp\htdocs\Pidev-web\src\LocationBundle</parameter>
         <parameter key="namespace">LocationBundle</parameter>
+      </parameter>
+      <parameter key="SkiesQRcodeBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">C:\xampp\htdocs\Pidev-web\vendor\yellowskies\qr-code-bundle</parameter>
+        <parameter key="namespace">Skies\QRcodeBundle</parameter>
+      </parameter>
+      <parameter key="KnpSnappyBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">C:/xampp/htdocs/Pidev-web/vendor/knplabs/knp-snappy-bundle</parameter>
+        <parameter key="namespace">Knp\Bundle\SnappyBundle</parameter>
+      </parameter>
+      <parameter key="NotificationsBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">C:\xampp\htdocs\Pidev-web\vendor\mrad\notifications-bundle\SBC\NotificationsBundle</parameter>
+        <parameter key="namespace">SBC\NotificationsBundle</parameter>
+      </parameter>
+      <parameter key="EndroidQrCodeBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">C:\xampp\htdocs\Pidev-web\vendor\endroid\qr-code\src\Bundle\QrCodeBundle</parameter>
+        <parameter key="namespace">Endroid\QrCode\Bundle\QrCodeBundle</parameter>
+      </parameter>
+      <parameter key="FOSJsRoutingBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\jsrouting-bundle</parameter>
+        <parameter key="namespace">FOS\JsRoutingBundle</parameter>
+      </parameter>
+      <parameter key="ADesignsCalendarBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">C:\xampp\htdocs\Pidev-web\vendor\adesigns\calendar-bundle\ADesigns\CalendarBundle</parameter>
+        <parameter key="namespace">ADesigns\CalendarBundle</parameter>
+      </parameter>
+      <parameter key="FullCalendarBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">C:\xampp\htdocs\Pidev-web\vendor\ancarebeca\full-calendar-bundle</parameter>
+        <parameter key="namespace">AncaRebeca\FullCalendarBundle</parameter>
+      </parameter>
+      <parameter key="GregwarCaptchaBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle</parameter>
+        <parameter key="namespace">Gregwar\CaptchaBundle</parameter>
       </parameter>
       <parameter key="DebugBundle" type="collection">
         <parameter key="parent">null</parameter>
@@ -235,6 +283,7 @@
     <parameter key="twig.exception_listener.controller">twig.controller.exception:showAction</parameter>
     <parameter key="twig.form.resources" type="collection">
       <parameter>@FOSCKEditor/Form/ckeditor_widget.html.twig</parameter>
+      <parameter>@GregwarCaptcha/captcha.html.twig</parameter>
       <parameter>form_div_layout.html.twig</parameter>
       <parameter>@FOSCKEditor/Form/ckeditor_widget.html.twig</parameter>
     </parameter>
@@ -527,6 +576,70 @@
       <parameter key="theme">default</parameter>
     </parameter>
     <parameter key="social.theme">default</parameter>
+    <parameter key="knp_snappy.pdf.binary">"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"</parameter>
+    <parameter key="knp_snappy.pdf.options" type="collection"/>
+    <parameter key="knp_snappy.pdf.env" type="collection"/>
+    <parameter key="knp_snappy.image.binary">wkhtmltoimage</parameter>
+    <parameter key="knp_snappy.image.options" type="collection"/>
+    <parameter key="knp_snappy.image.env" type="collection"/>
+    <parameter key="notifications" type="collection">
+      <parameter key="app_id">952182</parameter>
+      <parameter key="app_key">00dcbcf3cd81d0ee7293</parameter>
+      <parameter key="app_secret">4b6e0f2bd840891d4e92</parameter>
+      <parameter key="cluster">eu</parameter>
+      <parameter key="encrypted">false</parameter>
+    </parameter>
+    <parameter key="fos_js_routing.extractor.class">FOS\JsRoutingBundle\Extractor\ExposedRoutesExtractor</parameter>
+    <parameter key="fos_js_routing.controller.class">FOS\JsRoutingBundle\Controller\Controller</parameter>
+    <parameter key="fos_js_routing.normalizer.route_collection.class">FOS\JsRoutingBundle\Serializer\Normalizer\RouteCollectionNormalizer</parameter>
+    <parameter key="fos_js_routing.normalizer.routes_response.class">FOS\JsRoutingBundle\Serializer\Normalizer\RoutesResponseNormalizer</parameter>
+    <parameter key="fos_js_routing.denormalizer.route_collection.class">FOS\JsRoutingBundle\Serializer\Denormalizer\RouteCollectionDenormalizer</parameter>
+    <parameter key="fos_js_routing.request_context_base_url">null</parameter>
+    <parameter key="fos_js_routing.cache_control" type="collection">
+      <parameter key="enabled">false</parameter>
+    </parameter>
+    <parameter key="fullcalendar.event.class">ADesigns\CalendarBundle\Entity\EventEntity</parameter>
+    <parameter key="fullcalendar.loader.event">calendar.load_events</parameter>
+    <parameter key="gregwar_captcha.captcha_type.class">Gregwar\CaptchaBundle\Type\CaptchaType</parameter>
+    <parameter key="gregwar_captcha.captcha_generator.class">Gregwar\CaptchaBundle\Generator\CaptchaGenerator</parameter>
+    <parameter key="gregwar_captcha.image_file_handler.class">Gregwar\CaptchaBundle\Generator\ImageFileHandler</parameter>
+    <parameter key="gregwar_captcha.captcha_builder.class">Gregwar\Captcha\CaptchaBuilder</parameter>
+    <parameter key="gregwar_captcha.phrase_builder.class">Gregwar\Captcha\PhraseBuilder</parameter>
+    <parameter key="gregwar_captcha.config" type="collection">
+      <parameter key="length">5</parameter>
+      <parameter key="width">130</parameter>
+      <parameter key="height">50</parameter>
+      <parameter key="font">C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle\DependencyInjection/../Generator/Font/captcha.ttf</parameter>
+      <parameter key="keep_value">false</parameter>
+      <parameter key="charset">abcdefhjkmnprstuvwxyz23456789</parameter>
+      <parameter key="as_file">false</parameter>
+      <parameter key="as_url">false</parameter>
+      <parameter key="reload">false</parameter>
+      <parameter key="image_folder">captcha</parameter>
+      <parameter key="web_path">C:\xampp\htdocs\Pidev-web\app/../web</parameter>
+      <parameter key="gc_freq">100</parameter>
+      <parameter key="expiration">60</parameter>
+      <parameter key="quality">50</parameter>
+      <parameter key="invalid_message">Bad code value</parameter>
+      <parameter key="bypass_code">null</parameter>
+      <parameter key="whitelist_key">captcha_whitelist_key</parameter>
+      <parameter key="humanity">0</parameter>
+      <parameter key="distortion">true</parameter>
+      <parameter key="max_front_lines">null</parameter>
+      <parameter key="max_behind_lines">null</parameter>
+      <parameter key="interpolation">true</parameter>
+      <parameter key="text_color" type="collection"/>
+      <parameter key="background_color" type="collection"/>
+      <parameter key="background_images" type="collection"/>
+      <parameter key="disabled">false</parameter>
+      <parameter key="ignore_all_effects">false</parameter>
+      <parameter key="session_key">captcha</parameter>
+    </parameter>
+    <parameter key="gregwar_captcha.config.image_folder">captcha</parameter>
+    <parameter key="gregwar_captcha.config.web_path">C:\xampp\htdocs\Pidev-web\app/../web</parameter>
+    <parameter key="gregwar_captcha.config.gc_freq">100</parameter>
+    <parameter key="gregwar_captcha.config.expiration">60</parameter>
+    <parameter key="gregwar_captcha.config.whitelist_key">captcha_whitelist_key</parameter>
     <parameter key="web_profiler.debug_toolbar.position">bottom</parameter>
     <parameter key="web_profiler.debug_toolbar.intercept_redirects">false</parameter>
     <parameter key="web_profiler.debug_toolbar.mode">2</parameter>
@@ -657,6 +770,8 @@
       <parameter key="console.command.fos_userbundle_command_demoteusercommand">fos_user.command.demote_user</parameter>
       <parameter key="console.command.fos_userbundle_command_promoteusercommand">fos_user.command.promote_user</parameter>
       <parameter key="console.command.fos_ckeditorbundle_command_ckeditorinstallercommand">fos_ck_editor.command.installer</parameter>
+      <parameter key="console.command.fos_jsroutingbundle_command_dumpcommand">fos_js_routing.dump_command</parameter>
+      <parameter key="console.command.fos_jsroutingbundle_command_routerdebugexposedcommand">fos_js_routing.router_debug_exposed_command</parameter>
       <parameter key="console.command.sensiolabs_security_command_securitycheckercommand">sensio_distribution.security_checker.command</parameter>
       <parameter key="console.command.symfony_bundle_webserverbundle_command_serverruncommand">web_server.command.server_run</parameter>
       <parameter key="console.command.symfony_bundle_webserverbundle_command_serverstartcommand">web_server.command.server_start</parameter>
@@ -713,6 +828,8 @@
       <parameter key="fos_user.command.demote_user">true</parameter>
       <parameter key="fos_user.command.promote_user">true</parameter>
       <parameter key="fos_ck_editor.command.installer">true</parameter>
+      <parameter key="fos_js_routing.dump_command">true</parameter>
+      <parameter key="fos_js_routing.router_debug_exposed_command">true</parameter>
       <parameter key="sensio_distribution.security_checker.command">true</parameter>
       <parameter key="web_server.command.server_run">true</parameter>
       <parameter key="web_server.command.server_start">true</parameter>
@@ -731,6 +848,7 @@
     <service id="AppBundle\Controller\DefaultController" class="AppBundle\Controller\DefaultController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
     </service>
+    <service id="AppBundle\Listener\LoadDataListener" class="AppBundle\Listener\LoadDataListener" public="false" autowire="true" autoconfigure="true"/>
     <service id="AppBundle\Listener\LoginSuccessHandler" class="AppBundle\Listener\LoginSuccessHandler" public="false" autowire="true" autoconfigure="true">
       <argument type="service" id="router.default"/>
     </service>
@@ -1029,6 +1147,7 @@
         <argument>FOS\UserBundle\Form\Type</argument>
         <argument>Vich\UploaderBundle\Form\Type</argument>
         <argument>FOS\CKEditorBundle\Form\Type</argument>
+        <argument></argument>
       </argument>
       <argument type="collection">
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
@@ -1043,6 +1162,7 @@
         <argument>Vich\UploaderBundle\Form\Type\VichFileType</argument>
         <argument>Vich\UploaderBundle\Form\Type\VichImageType</argument>
         <argument>FOS\CKEditorBundle\Form\Type\CKEditorType</argument>
+        <argument>Gregwar\CaptchaBundle\Type\CaptchaType</argument>
       </argument>
       <argument type="collection">
         <argument>Symfony\Component\Form\Extension\Core\Type\TransformationFailureExtension</argument>
@@ -1255,7 +1375,7 @@
       <argument type="service" id="form.resolved_type_factory"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension" public="false">
-      <argument type="service" id="service_locator.1znlbcr"/>
+      <argument type="service" id="service_locator.rquzdxf"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -1635,6 +1755,8 @@
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.ar.yml</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\knplabs\knp-paginator-bundle/Resources/translations\KnpPaginatorBundle.ar.xliff</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\vich\uploader-bundle/Resources/translations\VichUploaderBundle.ar.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\gregwar_captcha.ar.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\validators.ar.yml</argument>
           </argument>
           <argument key="az" type="collection">
             <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.az.xlf</argument>
@@ -1652,6 +1774,8 @@
             <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Component\Security\Core/Resources/translations\security.bg.xlf</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.bg.yml</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.bg.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\gregwar_captcha.bg.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\validators.bg.yml</argument>
           </argument>
           <argument key="ca" type="collection">
             <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.ca.xlf</argument>
@@ -1667,6 +1791,8 @@
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.cs.yml</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.cs.yml</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\knplabs\knp-paginator-bundle/Resources/translations\KnpPaginatorBundle.cs.xliff</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\gregwar_captcha.cs.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\validators.cs.yml</argument>
           </argument>
           <argument key="cy" type="collection">
             <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.cy.xlf</argument>
@@ -1687,6 +1813,8 @@
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.de.yml</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\knplabs\knp-paginator-bundle/Resources/translations\KnpPaginatorBundle.de.xliff</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\vich\uploader-bundle/Resources/translations\VichUploaderBundle.de.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\gregwar_captcha.de.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\validators.de.yml</argument>
           </argument>
           <argument key="el" type="collection">
             <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.el.xlf</argument>
@@ -1703,6 +1831,8 @@
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.en.yml</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\knplabs\knp-paginator-bundle/Resources/translations\KnpPaginatorBundle.en.xliff</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\vich\uploader-bundle/Resources/translations\VichUploaderBundle.en.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\gregwar_captcha.en.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\validators.en.yml</argument>
           </argument>
           <argument key="es" type="collection">
             <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.es.xlf</argument>
@@ -1712,6 +1842,8 @@
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.es.yml</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\knplabs\knp-paginator-bundle/Resources/translations\KnpPaginatorBundle.es.xliff</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\vich\uploader-bundle/Resources/translations\VichUploaderBundle.es.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\gregwar_captcha.es.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\validators.es.yml</argument>
           </argument>
           <argument key="et" type="collection">
             <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.et.xlf</argument>
@@ -1747,6 +1879,8 @@
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.fr.yml</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\knplabs\knp-paginator-bundle/Resources/translations\KnpPaginatorBundle.fr.xliff</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\vich\uploader-bundle/Resources/translations\VichUploaderBundle.fr.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\gregwar_captcha.fr.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\validators.fr.yml</argument>
           </argument>
           <argument key="gl" type="collection">
             <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.gl.xlf</argument>
@@ -1797,6 +1931,8 @@
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.it.yml</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\knplabs\knp-paginator-bundle/Resources/translations\KnpPaginatorBundle.it.xliff</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\vich\uploader-bundle/Resources/translations\VichUploaderBundle.it.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\gregwar_captcha.it.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\validators.it.yml</argument>
           </argument>
           <argument key="ja" type="collection">
             <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.ja.xlf</argument>
@@ -1845,6 +1981,8 @@
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.nl.yml</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.nl.yml</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\knplabs\knp-paginator-bundle/Resources/translations\KnpPaginatorBundle.nl.xliff</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\gregwar_captcha.nl.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\validators.nl.yml</argument>
           </argument>
           <argument key="nn" type="collection">
             <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.nn.xlf</argument>
@@ -1865,6 +2003,8 @@
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.pl.yml</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\knplabs\knp-paginator-bundle/Resources/translations\KnpPaginatorBundle.pl.xliff</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\vich\uploader-bundle/Resources/translations\VichUploaderBundle.pl.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\gregwar_captcha.pl.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\validators.pl.yml</argument>
           </argument>
           <argument key="pt" type="collection">
             <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.pt.xlf</argument>
@@ -1880,6 +2020,8 @@
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.pt_BR.yml</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.pt_BR.yml</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\knplabs\knp-paginator-bundle/Resources/translations\KnpPaginatorBundle.pt_BR.xliff</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\gregwar_captcha.pt_BR.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\validators.pt_BR.yml</argument>
           </argument>
           <argument key="ro" type="collection">
             <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.ro.xlf</argument>
@@ -1888,6 +2030,8 @@
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.ro.yml</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.ro.yml</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\knplabs\knp-paginator-bundle/Resources/translations\KnpPaginatorBundle.ro.xliff</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\gregwar_captcha.ro.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\validators.ro.yml</argument>
           </argument>
           <argument key="ru" type="collection">
             <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.ru.xlf</argument>
@@ -1897,6 +2041,8 @@
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.ru.yml</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\knplabs\knp-paginator-bundle/Resources/translations\KnpPaginatorBundle.ru.xliff</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\vich\uploader-bundle/Resources/translations\VichUploaderBundle.ru.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\gregwar_captcha.ru.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\validators.ru.yml</argument>
           </argument>
           <argument key="sk" type="collection">
             <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.sk.xlf</argument>
@@ -1954,6 +2100,8 @@
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.tr.yml</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.tr.yml</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\vich\uploader-bundle/Resources/translations\VichUploaderBundle.tr.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\gregwar_captcha.tr.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\validators.tr.yml</argument>
           </argument>
           <argument key="uk" type="collection">
             <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.uk.xlf</argument>
@@ -1963,6 +2111,8 @@
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.uk.yml</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\knplabs\knp-paginator-bundle/Resources/translations\KnpPaginatorBundle.uk.xliff</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\vich\uploader-bundle/Resources/translations\VichUploaderBundle.uk.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\gregwar_captcha.uk.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\validators.uk.yml</argument>
           </argument>
           <argument key="vi" type="collection">
             <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.vi.xlf</argument>
@@ -1977,6 +2127,8 @@
             <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Component\Security\Core/Resources/translations\security.zh_CN.xlf</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.zh_CN.yml</argument>
             <argument>C:\xampp\htdocs\Pidev-web\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.zh_CN.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\gregwar_captcha.zh_CN.yml</argument>
+            <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/translations\validators.zh_CN.yml</argument>
           </argument>
           <argument key="zh_TW" type="collection">
             <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Component\Validator/Resources/translations\validators.zh_TW.xlf</argument>
@@ -2657,14 +2809,6 @@
       </call>
       <call method="addListener">
         <argument>kernel.request</argument>
-        <argument type="collection">
-          <argument type="service" id="debug.debug_handlers_listener"/>
-          <argument>configure</argument>
-        </argument>
-        <argument>2048</argument>
-      </call>
-      <call method="addListener">
-        <argument>console.command</argument>
         <argument type="collection">
           <argument type="service" id="debug.debug_handlers_listener"/>
           <argument>configure</argument>
@@ -3937,6 +4081,15 @@
         <argument type="service" id="twig.extension.nomaya_social_links"/>
       </call>
       <call method="addExtension">
+        <argument type="service" id="skies_barcode.twig.extension"/>
+      </call>
+      <call method="addExtension">
+        <argument type="service" id="notifications.assets.extension"/>
+      </call>
+      <call method="addExtension">
+        <argument type="service" id="endroid.qrcode.twig.extension"/>
+      </call>
+      <call method="addExtension">
         <argument type="service" id="twig.extension.webprofiler"/>
       </call>
       <call method="addGlobal">
@@ -4115,6 +4268,38 @@
       <call method="addPath">
         <argument>C:\xampp\htdocs\Pidev-web\src\LocationBundle/Resources/views</argument>
         <argument>!Location</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\endroid\qr-code\src\Bundle\QrCodeBundle/Resources/views</argument>
+        <argument>EndroidQrCode</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\endroid\qr-code\src\Bundle\QrCodeBundle/Resources/views</argument>
+        <argument>!EndroidQrCode</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\adesigns\calendar-bundle\ADesigns\CalendarBundle/Resources/views</argument>
+        <argument>ADesignsCalendar</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\adesigns\calendar-bundle\ADesigns\CalendarBundle/Resources/views</argument>
+        <argument>!ADesignsCalendar</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\ancarebeca\full-calendar-bundle/Resources/views</argument>
+        <argument>FullCalendar</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\ancarebeca\full-calendar-bundle/Resources/views</argument>
+        <argument>!FullCalendar</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/views</argument>
+        <argument>GregwarCaptcha</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/views</argument>
+        <argument>!GregwarCaptcha</argument>
       </call>
       <call method="addPath">
         <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/views</argument>
@@ -4370,6 +4555,38 @@
       <call method="addPath">
         <argument>C:\xampp\htdocs\Pidev-web\src\LocationBundle/Resources/views</argument>
         <argument>!Location</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\endroid\qr-code\src\Bundle\QrCodeBundle/Resources/views</argument>
+        <argument>EndroidQrCode</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\endroid\qr-code\src\Bundle\QrCodeBundle/Resources/views</argument>
+        <argument>!EndroidQrCode</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\adesigns\calendar-bundle\ADesigns\CalendarBundle/Resources/views</argument>
+        <argument>ADesignsCalendar</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\adesigns\calendar-bundle\ADesigns\CalendarBundle/Resources/views</argument>
+        <argument>!ADesignsCalendar</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\ancarebeca\full-calendar-bundle/Resources/views</argument>
+        <argument>FullCalendar</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\ancarebeca\full-calendar-bundle/Resources/views</argument>
+        <argument>!FullCalendar</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/views</argument>
+        <argument>GregwarCaptcha</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/views</argument>
+        <argument>!GregwarCaptcha</argument>
       </call>
       <call method="addPath">
         <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/views</argument>
@@ -4708,6 +4925,9 @@
       <call method="addEventSubscriber">
         <argument type="service" id="vich_uploader.listener.upload.uploads"/>
       </call>
+      <call method="addEventSubscriber">
+        <argument type="service" id="history.service"/>
+      </call>
       <call method="addEventListener">
         <argument type="collection">
           <argument>loadClassMetadata</argument>
@@ -4879,6 +5099,7 @@
           <argument key="BlogBundle">BlogBundle\Entity</argument>
           <argument key="ContacusBundle">ContacusBundle\Entity</argument>
           <argument key="LocationBundle">LocationBundle\Entity</argument>
+          <argument key="ADesignsCalendarBundle">ADesigns\CalendarBundle\Entity</argument>
         </argument>
       </call>
       <call method="setMetadataCacheImpl">
@@ -4930,6 +5151,7 @@
         <argument>C:\xampp\htdocs\Pidev-web\src\BlogBundle\Entity</argument>
         <argument>C:\xampp\htdocs\Pidev-web\src\ContacusBundle\Entity</argument>
         <argument>C:\xampp\htdocs\Pidev-web\src\LocationBundle\Entity</argument>
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\adesigns\calendar-bundle\ADesigns\CalendarBundle\Entity</argument>
       </argument>
     </service>
     <service id="doctrine.orm.default_metadata_driver" class="Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain" public="false">
@@ -4956,6 +5178,10 @@
       <call method="addDriver">
         <argument type="service" id="doctrine.orm.default_annotation_metadata_driver"/>
         <argument>LocationBundle\Entity</argument>
+      </call>
+      <call method="addDriver">
+        <argument type="service" id="doctrine.orm.default_annotation_metadata_driver"/>
+        <argument>ADesigns\CalendarBundle\Entity</argument>
       </call>
       <call method="addDriver">
         <argument type="service">
@@ -5622,6 +5848,158 @@
       <tag name="twig.extension"/>
       <argument type="service" id="service_container"/>
     </service>
+    <service id="skies_barcode.generator" class="Skies\QRcodeBundle\Generator\Generator"/>
+    <service id="skies_barcode.twig.extension" class="Skies\QRcodeBundle\Twig\Extensions\Barcode">
+      <tag name="twig.extension"/>
+      <argument type="service" id="skies_barcode.generator"/>
+    </service>
+    <service id="knp_snappy.pdf" class="Knp\Snappy\Pdf" public="true">
+      <tag name="monolog.logger" channel="snappy"/>
+      <argument>"C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe"</argument>
+      <argument type="collection"/>
+      <argument type="collection"/>
+      <call method="setLogger">
+        <argument type="service" id="monolog.logger.snappy" on-invalid="ignore"/>
+      </call>
+    </service>
+    <service id="knp_snappy.image" class="Knp\Snappy\Image" public="true">
+      <tag name="monolog.logger" channel="snappy"/>
+      <argument>wkhtmltoimage</argument>
+      <argument type="collection"/>
+      <argument type="collection"/>
+      <call method="setLogger">
+        <argument type="service" id="monolog.logger.snappy" on-invalid="ignore"/>
+      </call>
+    </service>
+    <service id="history.service" class="SBC\NotificationsBundle\EventListener\HistoryService">
+      <tag name="doctrine.event_subscriber" connection="default"/>
+      <argument type="service" id="service_container"/>
+    </service>
+    <service id="mrad.pusher.notificaitons" class="SBC\NotificationsBundle\Service\PusherService">
+      <argument type="service" id="service_container"/>
+    </service>
+    <service id="notifications.assets.extension" class="SBC\NotificationsBundle\Twig\NotificationsAssetsExtension" public="true">
+      <tag name="twig.extension"/>
+      <argument type="service" id="service_container"/>
+    </service>
+    <service id="endroid.qrcode.factory" class="Endroid\QrCode\Factory\QrCodeFactory">
+      <argument type="collection">
+        <argument key="encoding">UTF-8</argument>
+      </argument>
+      <argument type="service" id="endroid.qrcode.writer_registry"/>
+    </service>
+    <service id="endroid.qrcode.twig.extension" class="Endroid\QrCode\Twig\Extension\QrCodeExtension">
+      <tag name="twig.extension"/>
+      <argument type="service" id="endroid.qrcode.factory"/>
+      <argument type="service" id="router.default"/>
+    </service>
+    <service id="endroid.qrcode.writer_registry" class="Endroid\QrCode\WriterRegistry">
+      <call method="addWriter">
+        <argument type="service" id="endroid.qrcode.writer.binary_writer"/>
+        <argument>false</argument>
+      </call>
+      <call method="addWriter">
+        <argument type="service" id="endroid.qrcode.writer.debug_writer"/>
+        <argument>false</argument>
+      </call>
+      <call method="addWriter">
+        <argument type="service" id="endroid.qrcode.writer.eps_writer"/>
+        <argument>false</argument>
+      </call>
+      <call method="addWriter">
+        <argument type="service" id="endroid.qrcode.writer.png_writer"/>
+        <argument>true</argument>
+      </call>
+      <call method="addWriter">
+        <argument type="service" id="endroid.qrcode.writer.svg_writer"/>
+        <argument>false</argument>
+      </call>
+    </service>
+    <service id="endroid.qrcode.writer.binary_writer" class="Endroid\QrCode\Writer\BinaryWriter">
+      <tag name="endroid.qrcode.writer"/>
+    </service>
+    <service id="endroid.qrcode.writer.debug_writer" class="Endroid\QrCode\Writer\DebugWriter">
+      <tag name="endroid.qrcode.writer"/>
+    </service>
+    <service id="endroid.qrcode.writer.eps_writer" class="Endroid\QrCode\Writer\EpsWriter">
+      <tag name="endroid.qrcode.writer"/>
+    </service>
+    <service id="endroid.qrcode.writer.png_writer" class="Endroid\QrCode\Writer\PngWriter">
+      <tag name="endroid.qrcode.writer" set_as_default="1"/>
+    </service>
+    <service id="endroid.qrcode.writer.svg_writer" class="Endroid\QrCode\Writer\SvgWriter">
+      <tag name="endroid.qrcode.writer"/>
+    </service>
+    <service id="fos_js_routing.extractor" class="FOS\JsRoutingBundle\Extractor\ExposedRoutesExtractor" public="true">
+      <argument type="service" id="router.default"/>
+      <argument type="collection"/>
+      <argument>C:\xampp\htdocs\Pidev-web\var\cache\dev</argument>
+      <argument>%kernel.bundles%</argument>
+    </service>
+    <service id="fos_js_routing.dump_command" class="FOS\JsRoutingBundle\Command\DumpCommand">
+      <tag name="console.command"/>
+      <argument type="service" id="fos_js_routing.extractor"/>
+      <argument type="service" id="fos_js_routing.serializer"/>
+      <argument>C:\xampp\htdocs\Pidev-web\app</argument>
+      <argument>null</argument>
+      <call method="setName">
+        <argument>fos:js-routing:dump</argument>
+      </call>
+    </service>
+    <service id="fos_js_routing.router_debug_exposed_command" class="FOS\JsRoutingBundle\Command\RouterDebugExposedCommand">
+      <tag name="console.command"/>
+      <argument type="service" id="fos_js_routing.extractor"/>
+      <argument type="service" id="router.default"/>
+      <call method="setName">
+        <argument>fos:js-routing:debug</argument>
+      </call>
+    </service>
+    <service id="fos_js_routing.controller" class="FOS\JsRoutingBundle\Controller\Controller" public="true">
+      <argument type="service" id="fos_js_routing.serializer"/>
+      <argument type="service" id="fos_js_routing.extractor"/>
+      <argument>%fos_js_routing.cache_control%</argument>
+      <argument>true</argument>
+    </service>
+    <service id="fos_js_routing.serializer" class="Symfony\Component\Serializer\Serializer" public="true">
+      <argument type="collection">
+        <argument type="service" id="fos_js_routing.normalizer.route_collection"/>
+        <argument type="service" id="fos_js_routing.normalizer.routes_response"/>
+        <argument type="service" id="fos_js_routing.denormalizer.route_collection"/>
+      </argument>
+      <argument type="collection">
+        <argument key="json" type="service" id="fos_js_routing.encoder"/>
+      </argument>
+    </service>
+    <service id="fos_js_routing.normalizer.route_collection" class="FOS\JsRoutingBundle\Serializer\Normalizer\RouteCollectionNormalizer" public="false"/>
+    <service id="fos_js_routing.normalizer.routes_response" class="FOS\JsRoutingBundle\Serializer\Normalizer\RoutesResponseNormalizer" public="false"/>
+    <service id="fos_js_routing.denormalizer.route_collection" class="FOS\JsRoutingBundle\Serializer\Denormalizer\RouteCollectionDenormalizer" public="false"/>
+    <service id="fos_js_routing.encoder" class="Symfony\Component\Serializer\Encoder\JsonEncoder" public="false"/>
+    <service id="anca_rebeca_full_calendar.service.serializer" class="AncaRebeca\FullCalendarBundle\Service\Serializer" public="false"/>
+    <service id="anca_rebeca_full_calendar.service.calendar" class="AncaRebeca\FullCalendarBundle\Service\Calendar">
+      <argument type="service" id="anca_rebeca_full_calendar.service.serializer"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+    </service>
+    <service id="captcha.type" class="Gregwar\CaptchaBundle\Type\CaptchaType" public="true">
+      <tag name="form.type" alias="captcha"/>
+      <argument type="service" id="session"/>
+      <argument type="service" id="gregwar_captcha.generator"/>
+      <argument type="service" id="translator.data_collector"/>
+      <argument>%gregwar_captcha.config%</argument>
+    </service>
+    <service id="gregwar_captcha.generator" class="Gregwar\CaptchaBundle\Generator\CaptchaGenerator" public="true">
+      <argument type="service" id="router.default"/>
+      <argument type="service" id="gregwar_captcha.captcha_builder"/>
+      <argument type="service" id="gregwar_captcha.phrase_builder"/>
+      <argument type="service" id="gregwar_captcha.image_file_handler"/>
+    </service>
+    <service id="gregwar_captcha.image_file_handler" class="Gregwar\CaptchaBundle\Generator\ImageFileHandler" public="true">
+      <argument>captcha</argument>
+      <argument>C:\xampp\htdocs\Pidev-web\app/../web</argument>
+      <argument>100</argument>
+      <argument>60</argument>
+    </service>
+    <service id="gregwar_captcha.captcha_builder" class="Gregwar\Captcha\CaptchaBuilder" public="true"/>
+    <service id="gregwar_captcha.phrase_builder" class="Gregwar\Captcha\PhraseBuilder" public="true"/>
     <service id="twig.extension.dump" class="Symfony\Bridge\Twig\Extension\DumpExtension" public="false">
       <tag name="twig.extension"/>
       <argument type="service" id="var_dumper.cloner"/>
@@ -5807,9 +6185,10 @@
         <argument key="inline" type="service" id="fragment.renderer.inline"/>
       </argument>
     </service>
-    <service id="service_locator.1znlbcr" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id="service_locator.rquzdxf" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="Gregwar\CaptchaBundle\Type\CaptchaType" type="service" id="captcha.type"/>
         <argument key="FOS\CKEditorBundle\Form\Type\CKEditorType" type="service" id="fos_ck_editor.form.type"/>
         <argument key="FOS\UserBundle\Form\Type\ChangePasswordFormType" type="service" id="fos_user.change_password.form.type"/>
         <argument key="FOS\UserBundle\Form\Type\ProfileFormType" type="service" id="fos_user.profile.form.type"/>
@@ -5965,6 +6344,21 @@
         <argument type="service" id="monolog.handler.main"/>
       </call>
     </service>
+    <service id="monolog.logger.snappy" class="Symfony\Bridge\Monolog\Logger">
+      <argument>snappy</argument>
+      <call method="pushProcessor">
+        <argument type="service" id="debug.log_processor"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.server_log"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.console"/>
+      </call>
+      <call method="pushHandler">
+        <argument type="service" id="monolog.handler.main"/>
+      </call>
+    </service>
     <service id="monolog.handler.null_internal" class="Monolog\Handler\NullHandler"/>
     <service id="service_locator.s.m3yzc" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
@@ -6044,7 +6438,7 @@
       <argument>true</argument>
     </service>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
-      <argument type="service" id="service_locator.emd_ez_"/>
+      <argument type="service" id="service_locator.mavabby"/>
       <argument type="collection">
         <argument key="about">console.command.about</argument>
         <argument key="assets:install">console.command.assets_install</argument>
@@ -6094,6 +6488,8 @@
         <argument key="fos:user:demote">fos_user.command.demote_user</argument>
         <argument key="fos:user:promote">fos_user.command.promote_user</argument>
         <argument key="ckeditor:install">fos_ck_editor.command.installer</argument>
+        <argument key="fos:js-routing:dump">fos_js_routing.dump_command</argument>
+        <argument key="fos:js-routing:debug">fos_js_routing.router_debug_exposed_command</argument>
         <argument key="security:check">sensio_distribution.security_checker.command</argument>
         <argument key="server:run">web_server.command.server_run</argument>
         <argument key="server:start">web_server.command.server_start</argument>
@@ -6102,7 +6498,7 @@
         <argument key="server:log">web_server.command.server_log</argument>
       </argument>
     </service>
-    <service id="service_locator.emd_ez_" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id="service_locator.mavabby" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="console.command.about" type="service" id="console.command.about"/>
@@ -6144,6 +6540,8 @@
         <argument key="doctrine.schema_update_command" type="service" id="doctrine.schema_update_command"/>
         <argument key="doctrine.schema_validate_command" type="service" id="doctrine.schema_validate_command"/>
         <argument key="fos_ck_editor.command.installer" type="service" id="fos_ck_editor.command.installer"/>
+        <argument key="fos_js_routing.dump_command" type="service" id="fos_js_routing.dump_command"/>
+        <argument key="fos_js_routing.router_debug_exposed_command" type="service" id="fos_js_routing.router_debug_exposed_command"/>
         <argument key="fos_user.command.activate_user" type="service" id="fos_user.command.activate_user"/>
         <argument key="fos_user.command.change_password" type="service" id="fos_user.command.change_password"/>
         <argument key="fos_user.command.create_user" type="service" id="fos_user.command.create_user"/>
@@ -6321,6 +6719,9 @@
     <service id="vich_uploader.storage" alias="vich_uploader.storage.file_system"/>
     <service id="vich_uploader.metadata_driver" alias="vich_uploader.metadata_driver.chain" public="false"/>
     <service id="vich_uploader.metadata.cache" alias="vich_uploader.metadata.cache.file_cache" public="false"/>
+    <service id="Knp\Snappy\Pdf" alias="knp_snappy.pdf"/>
+    <service id="Knp\Snappy\Image" alias="knp_snappy.image"/>
+    <service id="fos_js_routing.router" alias="router.default" public="false"/>
     <service id="Symfony\Component\Templating\EngineInterface" alias="templating.engine.twig" public="false"/>
     <service id="Symfony\Bundle\FrameworkBundle\Templating\EngineInterface" alias="templating.engine.twig" public="false"/>
     <service id="twig.loader" alias="twig.loader.filesystem"/>

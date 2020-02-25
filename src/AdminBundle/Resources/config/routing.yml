@@ -70,3 +70,12 @@ reply:
 acceptblog:
     path:     /acceptblog/{id}
     defaults: { _controller: "AdminBundle:Default:acceptblog" }
+sentiments:
+    path:     /sentiments/{id}
+    defaults: { _controller: "AdminBundle:Sentiment:Sentiment" }
+confirmcontrat:
+    path:     /confirmcontrat/{id}
+    defaults: { _controller: "AdminBundle:Default:ConfirmContract" }
+affichecontract:
+    path:     /affichecontract
+    defaults: { _controller: "AdminBundle:Default:AfficherContract" }
