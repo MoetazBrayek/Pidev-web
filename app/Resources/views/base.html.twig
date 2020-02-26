@@ -4,7 +4,12 @@
 
 <!-- Mirrored from thememarch.com/demo/html/malic/malic/login-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Jan 2020 19:44:34 GMT -->
 <head>
-    {# Call NotificationsBundles's assets #}
+    <script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
+    <script>
+        Weglot.initialize({
+            api_key: 'wg_97da7244e1d41e4bb79d3bd92880a0ce7'
+        });
+    </script>
     {{ notifications_assets() }}
     <script>
         /**
@@ -117,7 +122,7 @@
                     <nav class="tm-header-nav">
                         <ul>
                             <li><a href="{{ path('homepage') }}">Home</a></li>
-                            <li><a href="{{ path('homepage') }}">Evenment</a></li>
+                            <li><a href="{{ path('evenement_homepage') }}">Evenment</a></li>
                             <li class="tm-header-nav-dropdown"><a href="#">Shop</a>
                                 <ul>
                                     <li><a href="{{ path('shop_homepage') }}">Our Products</a></li>
@@ -137,13 +142,14 @@
                             <li class="tm-header-nav-dropdown"><a href="">Location</a>
                                 <ul>
                                     {% if app.user %}
+                                        <li><a href="{{ path('location_homepage') }}">Avaible Location</a></li>
                                         <li><a href="{{ path('mylocation') }}">My Locations</a></li>
                                     {% endif %}
                                 </ul>
                             </li>                            {% if app.user %}
                                 <li class="tm-header-nav-dropdown"><a href="#">My Orders</a>
                                     <ul>
-                                        <li><a href="{{ path('blog_homepage') }}">My Orders</a></li>
+                                        <li><a href="{{ path('myorder') }}">My Orders</a></li>
 
                                     </ul>
                                 </li>

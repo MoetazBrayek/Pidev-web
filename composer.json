@@ -38,6 +38,7 @@
         "twig/twig": "^1.0||^2.0",
         "twilio/sdk": "^5.42",
         "vich/uploader-bundle": "^1.4",
+        "weglot/translate-bundle": "^0.7.2",
         "yellowskies/qr-code-bundle": "^1.2"
     },
     "require-dev": {

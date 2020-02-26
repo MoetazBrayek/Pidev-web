@@ -4001,6 +4001,187 @@
         ]
     },
     {
+        "name": "weglot/simplehtmldom",
+        "version": "0.2",
+        "version_normalized": "0.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/weglot/simple_html_dom.git",
+            "reference": "2ea1e9e308b4b5efde92dcfbf5aa2599751ad443"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/weglot/simple_html_dom/zipball/2ea1e9e308b4b5efde92dcfbf5aa2599751ad443",
+            "reference": "2ea1e9e308b4b5efde92dcfbf5aa2599751ad443",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2018-04-12T11:51:29+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "SimpleHtmlDom": "src/"
+            },
+            "files": [
+                "src/simple_html_dom.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "S.C. Chen",
+                "email": "me578022@gmail.com"
+            }
+        ],
+        "description": "Composer package that gives you access to and (unlike all the others at this time) autoloads S.C. Chen's PHP Simple HTML DOM Parser Library",
+        "homepage": "http://simplehtmldom.sourceforge.net/",
+        "keywords": [
+            "Simple",
+            "dom",
+            "html"
+        ]
+    },
+    {
+        "name": "weglot/translate-bundle",
+        "version": "0.7.2",
+        "version_normalized": "0.7.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/weglot/translate-bundle.git",
+            "reference": "f5457f82f8bf8d98d6b68836d7a5bce35acc82e4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/weglot/translate-bundle/zipball/f5457f82f8bf8d98d6b68836d7a5bce35acc82e4",
+            "reference": "f5457f82f8bf8d98d6b68836d7a5bce35acc82e4",
+            "shasum": ""
+        },
+        "require": {
+            "ext-mbstring": "*",
+            "php": ">=5.5",
+            "weglot/weglot-php": "^0.6"
+        },
+        "time": "2018-07-10T10:21:21+00:00",
+        "type": "symfony-bundle",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Weglot\\TranslateBundle\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Floran Pagliai",
+                "email": "floran@weglot.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Remy Berda",
+                "email": "remy@weglot.com",
+                "role": "Developer"
+            },
+            {
+                "name": "Baptiste Leduc",
+                "email": "baptiste@weglot.com",
+                "homepage": "https://baptiste-leduc.now.sh/",
+                "role": "Developer"
+            }
+        ],
+        "description": "Seamless integration of Weglot into your Symfony project",
+        "homepage": "https://weglot.com/",
+        "keywords": [
+            "Symfony2",
+            "Weglot",
+            "i18n",
+            "languages",
+            "localization",
+            "php",
+            "symfony",
+            "symfony3",
+            "symfony4",
+            "translate",
+            "translation",
+            "translator",
+            "weglot-integration"
+        ]
+    },
+    {
+        "name": "weglot/weglot-php",
+        "version": "0.6.6",
+        "version_normalized": "0.6.6.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/weglot/weglot-php.git",
+            "reference": "400925c3f1b10ad1eebe97ac23f128d1909439a9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/weglot/weglot-php/zipball/400925c3f1b10ad1eebe97ac23f128d1909439a9",
+            "reference": "400925c3f1b10ad1eebe97ac23f128d1909439a9",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4",
+            "psr/cache": "^1.0",
+            "symfony/css-selector": "^2.8 || >=3.0",
+            "symfony/dom-crawler": "^2.8.1 || >=3.0",
+            "symfony/event-dispatcher": "^2.8 || >=3.0",
+            "weglot/simplehtmldom": "^0.2"
+        },
+        "require-dev": {
+            "codeception/codeception": "^2.4",
+            "vlucas/phpdotenv": "^2.4"
+        },
+        "time": "2018-10-29T16:56:49+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Weglot\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Thomas Deneulin",
+                "email": "thomas@weglot.com",
+                "role": "Review"
+            },
+            {
+                "name": "Baptiste Leduc",
+                "email": "baptiste@weglot.com",
+                "homepage": "https://baptiste-leduc.now.sh/",
+                "role": "Developer"
+            }
+        ],
+        "description": "PHP library for the Weglot API",
+        "homepage": "https://weglot.com/",
+        "keywords": [
+            "Weglot",
+            "i18n",
+            "languages",
+            "localization",
+            "php",
+            "translate",
+            "translation",
+            "translator",
+            "weglot-library"
+        ]
+    },
+    {
         "name": "willdurand/jsonp-callback-validator",
         "version": "v1.1.0",
         "version_normalized": "1.1.0.0",

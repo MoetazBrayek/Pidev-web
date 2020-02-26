@@ -18,6 +18,9 @@ fos_user:
 blog:
     resource: "@BlogBundle/Resources/config/routing.yml"
     prefix:   /Blog
+eventment:
+    resource: "@EvenementBundle/Resources/config/routing.yml"
+    prefix:   /eventment
 location:
     resource: "@LocationBundle/Resources/config/routing.yml"
     prefix:   /location

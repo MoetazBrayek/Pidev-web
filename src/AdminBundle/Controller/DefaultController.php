@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -171,9 +172,6 @@ class DefaultController extends Controller
             );
         } catch (TwilioException $e) {
             echo ('error');
-        } catch (TwilioException $e) {
-            echo ('error');
-
         }
 
         return $this->redirectToRoute('affichecontract');
@@ -323,6 +321,54 @@ class DefaultController extends Controller
 
     }
 
+    public function acceptorderAction($id){
+
+        if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $sn = $this->getDoctrine()->getManager();
+            $order = $sn->getRepository('ShopBundle:Order')->find($id);
+            $order->setEtat('Confirmed');
+            $sn->persist($order);
+            $sn->flush();
+            $account_sid = 'AC7c27b5ff7f1814c0e28ba26a431b376d';
+            $auth_token = '2fb29e88f4b292b2d4308928cf316aab';
+            $twilio_number = "+16084722458";
+            $client = new Client($account_sid, $auth_token);
+            try {
+                $client->messages->create(
+                // Where to send a text message (your cell phone?)
+                    '+21658804719',
+                    array(
+                        'from' => $twilio_number,
+                        'body' => 'Your Order Id : '.$order->getId().' Has Been SHipped '
+                ));
+            } catch (TwilioException $e) {
+                echo ('error');
+            }
+        }
+        else{
+            return $this->redirectToRoute('fos_user_security_login');
+        }
+        return $this->redirectToRoute('afficheorders');
+
+    }
+    public function declinedorderAction($id){
+
+        if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $sn = $this->getDoctrine()->getManager();
+            $order = $sn->getRepository('ShopBundle:Order')->find($id);
+            $order->setEtat('Declined');
+            $sn->persist($order);
+            $sn->flush();
+
+            return $this->redirectToRoute('afficheorders');
+        }
+        else{
+            return $this->redirectToRoute('fos_user_security_login');
+        }
+
+
+    }
+
     public function AfficherProductsAction(Request $request){
 
         $allprod = $this->getDoctrine()
@@ -338,6 +384,24 @@ class DefaultController extends Controller
         return $this->render('AdminBundle:Default:produits.html.twig', array(
 
             'prod'=>$pagination
+        ));
+
+    }
+    public function AfficherOrdersAction(Request $request){
+
+        $allprod = $this->getDoctrine()
+            ->getRepository('ShopBundle:Order')
+            ->findAll();
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $allprod,
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
+        );
+
+        return $this->render('AdminBundle:Default:Orders.html.twig', array(
+
+            'ordoers'=>$pagination
         ));
 
     }

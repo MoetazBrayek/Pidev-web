@@ -35,6 +35,9 @@ class AppKernel extends Kernel
             new ADesigns\CalendarBundle\ADesignsCalendarBundle(),
             new AncaRebeca\FullCalendarBundle\FullCalendarBundle(),
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
+            new Weglot\TranslateBundle\WeglotTranslateBundle(),
+            new EvenementBundle\EvenementBundle(),
+
 
         ];
 

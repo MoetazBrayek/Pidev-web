@@ -35,6 +35,8 @@
       <parameter key="ADesignsCalendarBundle">ADesigns\CalendarBundle\ADesignsCalendarBundle</parameter>
       <parameter key="FullCalendarBundle">AncaRebeca\FullCalendarBundle\FullCalendarBundle</parameter>
       <parameter key="GregwarCaptchaBundle">Gregwar\CaptchaBundle\GregwarCaptchaBundle</parameter>
+      <parameter key="WeglotTranslateBundle">Weglot\TranslateBundle\WeglotTranslateBundle</parameter>
+      <parameter key="EvenementBundle">EvenementBundle\EvenementBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -171,6 +173,16 @@
         <parameter key="parent">null</parameter>
         <parameter key="path">C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle</parameter>
         <parameter key="namespace">Gregwar\CaptchaBundle</parameter>
+      </parameter>
+      <parameter key="WeglotTranslateBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">C:\xampp\htdocs\Pidev-web\vendor\weglot\translate-bundle</parameter>
+        <parameter key="namespace">Weglot\TranslateBundle</parameter>
+      </parameter>
+      <parameter key="EvenementBundle" type="collection">
+        <parameter key="parent">null</parameter>
+        <parameter key="path">C:\xampp\htdocs\Pidev-web\src\EvenementBundle</parameter>
+        <parameter key="namespace">EvenementBundle</parameter>
       </parameter>
       <parameter key="DebugBundle" type="collection">
         <parameter key="parent">null</parameter>
@@ -640,6 +652,15 @@
     <parameter key="gregwar_captcha.config.gc_freq">100</parameter>
     <parameter key="gregwar_captcha.config.expiration">60</parameter>
     <parameter key="gregwar_captcha.config.whitelist_key">captcha_whitelist_key</parameter>
+    <parameter key="weglot.api_key">wg_97da7244e1d41e4bb79d3bd92880a0ce7</parameter>
+    <parameter key="weglot.exclude_blocks" type="collection"/>
+    <parameter key="weglot.original_language">en</parameter>
+    <parameter key="weglot.destination_languages" type="collection">
+      <parameter>fr</parameter>
+      <parameter>en</parameter>
+      <parameter>ch</parameter>
+    </parameter>
+    <parameter key="weglot.api_host">https://api.weglot.com</parameter>
     <parameter key="web_profiler.debug_toolbar.position">bottom</parameter>
     <parameter key="web_profiler.debug_toolbar.intercept_redirects">false</parameter>
     <parameter key="web_profiler.debug_toolbar.mode">2</parameter>
@@ -841,7 +862,7 @@
   <services>
     <service id="service_container" class="Symfony\Component\DependencyInjection\ContainerInterface" public="true" synthetic="true"/>
     <service id="authentication.handler.login_success_handler" class="AppBundle\Listener\LoginSuccessHandler" public="false" autowire="true" autoconfigure="true">
-      <argument type="service" id="router.default"/>
+      <argument type="service" id="weglot_translate.routing.router"/>
       <argument type="service" id="security.authorization_checker"/>
     </service>
     <service id="AppBundle\AppBundle" class="AppBundle\AppBundle" public="false" autowire="true" autoconfigure="true"/>
@@ -850,7 +871,7 @@
     </service>
     <service id="AppBundle\Listener\LoadDataListener" class="AppBundle\Listener\LoadDataListener" public="false" autowire="true" autoconfigure="true"/>
     <service id="AppBundle\Listener\LoginSuccessHandler" class="AppBundle\Listener\LoginSuccessHandler" public="false" autowire="true" autoconfigure="true">
-      <argument type="service" id="router.default"/>
+      <argument type="service" id="weglot_translate.routing.router"/>
     </service>
     <service id="AppBundle\Service\Variables" class="AppBundle\Service\Variables" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
@@ -896,7 +917,7 @@
       <tag name="container.hot_path"/>
       <argument type="service" id="request_stack"/>
       <argument>en</argument>
-      <argument type="service" id="router.default" on-invalid="ignore"/>
+      <argument type="service" id="weglot_translate.routing.router" on-invalid="ignore"/>
     </service>
     <service id="validate_request_listener" class="Symfony\Component\HttpKernel\EventListener\ValidateRequestListener">
       <tag name="kernel.event_subscriber"/>
@@ -970,6 +991,7 @@
         <argument key="monolog.handler.console" type="service" id="monolog.handler.console" on-invalid="ignore_uninitialized"/>
         <argument key="monolog.handler.server_log" type="service" id="monolog.handler.server_log" on-invalid="ignore_uninitialized"/>
         <argument key="form.type.entity" type="service" id="form.type.entity" on-invalid="ignore_uninitialized"/>
+        <argument key="weglot_translate.cache" type="service" id="weglot_translate.cache" on-invalid="ignore_uninitialized"/>
       </argument>
       <argument type="collection">
         <argument key="cache.app">reset</argument>
@@ -986,6 +1008,7 @@
         <argument key="monolog.handler.console">reset</argument>
         <argument key="monolog.handler.server_log">reset</argument>
         <argument key="form.type.entity">reset</argument>
+        <argument key="weglot_translate.cache">reset</argument>
       </argument>
     </service>
     <service id="fragment.handler" class="Symfony\Component\HttpKernel\DependencyInjection\LazyLoadingFragmentHandler">
@@ -1091,14 +1114,14 @@
     </service>
     <service id="console.command.router_debug" class="Symfony\Bundle\FrameworkBundle\Command\RouterDebugCommand" public="false">
       <tag name="console.command" command="debug:router"/>
-      <argument type="service" id="router.default"/>
+      <argument type="service" id="weglot_translate.routing.router"/>
       <call method="setName">
         <argument>debug:router</argument>
       </call>
     </service>
     <service id="console.command.router_match" class="Symfony\Bundle\FrameworkBundle\Command\RouterMatchCommand" public="false">
       <tag name="console.command" command="router:match"/>
-      <argument type="service" id="router.default"/>
+      <argument type="service" id="weglot_translate.routing.router"/>
       <call method="setName">
         <argument>router:match</argument>
       </call>
@@ -1287,6 +1310,7 @@
         <argument key="cache.validator" type="service" id="cache.validator" on-invalid="ignore_uninitialized"/>
         <argument key="cache.serializer" type="service" id="cache.serializer" on-invalid="ignore_uninitialized"/>
         <argument key="cache.annotations" type="service" id="cache.annotations" on-invalid="ignore_uninitialized"/>
+        <argument key="weglot_translate.cache" type="service" id="weglot_translate.cache" on-invalid="ignore_uninitialized"/>
       </argument>
     </service>
     <service id="cache.global_clearer" class="Symfony\Component\HttpKernel\CacheClearer\Psr6CacheClearer" public="true">
@@ -1297,6 +1321,7 @@
         <argument key="cache.validator" type="service" id="cache.validator" on-invalid="ignore_uninitialized"/>
         <argument key="cache.serializer" type="service" id="cache.serializer" on-invalid="ignore_uninitialized"/>
         <argument key="cache.annotations" type="service" id="cache.annotations" on-invalid="ignore_uninitialized"/>
+        <argument key="weglot_translate.cache" type="service" id="weglot_translate.cache" on-invalid="ignore_uninitialized"/>
       </argument>
     </service>
     <service id="translator.selector" class="Symfony\Component\Translation\MessageSelector" public="false"/>
@@ -2558,6 +2583,10 @@
         <argument>cache.annotations</argument>
         <argument type="service" id="cache.annotations"/>
       </call>
+      <call method="addInstance">
+        <argument>weglot_translate.cache</argument>
+        <argument type="service" id="weglot_translate.cache"/>
+      </call>
     </service>
     <service id="1_ResolvedFormTypeFactory~pu0a5ma" class="Symfony\Component\Form\ResolvedFormTypeFactory" public="false"/>
     <service id="form.type_extension.form.data_collector" class="Symfony\Component\Form\Extension\DataCollector\Type\DataCollectorTypeExtension" public="false">
@@ -3104,6 +3133,14 @@
         <argument>0</argument>
       </call>
       <call method="addListener">
+        <argument>kernel.response</argument>
+        <argument type="collection">
+          <argument type="service" id="weglot_translate.listener.request"/>
+          <argument>onKernelResponse</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
         <argument>console.command</argument>
         <argument type="collection">
           <argument type="service" id="debug.dump_listener"/>
@@ -3224,10 +3261,6 @@
       <tag name="routing.loader"/>
       <argument type="service" id="service_container"/>
     </service>
-    <service id="routing.loader" class="Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader" public="true">
-      <argument type="service" id="controller_name_converter"/>
-      <argument type="service" id="routing.resolver"/>
-    </service>
     <service id="router.default" class="Symfony\Bundle\FrameworkBundle\Routing\Router" public="false">
       <argument type="service" id="service_container"/>
       <argument>C:\xampp\htdocs\Pidev-web/app/config/routing_dev.yml</argument>
@@ -3267,7 +3300,7 @@
       <tag name="monolog.logger" channel="request"/>
       <tag name="container.hot_path"/>
       <tag name="container.hot_path"/>
-      <argument type="service" id="router.default"/>
+      <argument type="service" id="weglot_translate.routing.router"/>
       <argument type="service" id="request_stack"/>
       <argument type="service" id="router.request_context" on-invalid="ignore"/>
       <argument type="service" id="monolog.logger.request" on-invalid="ignore"/>
@@ -3275,7 +3308,7 @@
       <argument>true</argument>
     </service>
     <service id="Symfony\Bundle\FrameworkBundle\Controller\RedirectController" class="Symfony\Bundle\FrameworkBundle\Controller\RedirectController" public="true">
-      <argument type="service" id="router.default"/>
+      <argument type="service" id="weglot_translate.routing.router"/>
       <argument>80</argument>
       <argument>443</argument>
     </service>
@@ -3446,7 +3479,7 @@
     </service>
     <service id="security.logout_url_generator" class="Symfony\Component\Security\Http\Logout\LogoutUrlGenerator" public="false">
       <argument type="service" id="request_stack" on-invalid="null"/>
-      <argument type="service" id="router.default" on-invalid="null"/>
+      <argument type="service" id="weglot_translate.routing.router" on-invalid="null"/>
       <argument type="service" id="security.token_storage" on-invalid="null"/>
       <call method="registerListener">
         <argument>main</argument>
@@ -3471,8 +3504,8 @@
     </service>
     <service id="security.user.provider.chain" class="Symfony\Component\Security\Core\User\ChainUserProvider" public="false" abstract="true"/>
     <service id="security.http_utils" class="Symfony\Component\Security\Http\HttpUtils" public="false">
-      <argument type="service" id="router.default" on-invalid="null"/>
-      <argument type="service" id="router.default" on-invalid="null"/>
+      <argument type="service" id="weglot_translate.routing.router" on-invalid="null"/>
+      <argument type="service" id="weglot_translate.routing.router" on-invalid="null"/>
       <argument>{^https?://%%s$}i</argument>
     </service>
     <service id="security.validator.user_password" class="Symfony\Component\Security\Core\Validator\Constraints\UserPasswordValidator">
@@ -4090,6 +4123,15 @@
         <argument type="service" id="endroid.qrcode.twig.extension"/>
       </call>
       <call method="addExtension">
+        <argument type="service" id="weglot_translate.extension.weglot_button"/>
+      </call>
+      <call method="addExtension">
+        <argument type="service" id="weglot_translate.extension.language_code"/>
+      </call>
+      <call method="addExtension">
+        <argument type="service" id="weglot_translate.extension.href_lang"/>
+      </call>
+      <call method="addExtension">
         <argument type="service" id="twig.extension.webprofiler"/>
       </call>
       <call method="addGlobal">
@@ -4302,6 +4344,22 @@
         <argument>!GregwarCaptcha</argument>
       </call>
       <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\weglot\translate-bundle/Resources/views</argument>
+        <argument>WeglotTranslate</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\weglot\translate-bundle/Resources/views</argument>
+        <argument>!WeglotTranslate</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\src\EvenementBundle/Resources/views</argument>
+        <argument>Evenement</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\src\EvenementBundle/Resources/views</argument>
+        <argument>!Evenement</argument>
+      </call>
+      <call method="addPath">
         <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/views</argument>
         <argument>Debug</argument>
       </call>
@@ -4352,7 +4410,7 @@
     </service>
     <service id="twig.extension.routing" class="Symfony\Bridge\Twig\Extension\RoutingExtension" public="false">
       <tag name="twig.extension"/>
-      <argument type="service" id="router.default"/>
+      <argument type="service" id="weglot_translate.routing.router"/>
     </service>
     <service id="twig.extension.yaml" class="Symfony\Bridge\Twig\Extension\YamlExtension" public="false">
       <tag name="twig.extension"/>
@@ -4587,6 +4645,22 @@
       <call method="addPath">
         <argument>C:\xampp\htdocs\Pidev-web\vendor\gregwar\captcha-bundle/Resources/views</argument>
         <argument>!GregwarCaptcha</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\weglot\translate-bundle/Resources/views</argument>
+        <argument>WeglotTranslate</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\vendor\weglot\translate-bundle/Resources/views</argument>
+        <argument>!WeglotTranslate</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\src\EvenementBundle/Resources/views</argument>
+        <argument>Evenement</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\Pidev-web\src\EvenementBundle/Resources/views</argument>
+        <argument>!Evenement</argument>
       </call>
       <call method="addPath">
         <argument>C:\xampp\htdocs\Pidev-web\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/views</argument>
@@ -5100,6 +5174,7 @@
           <argument key="ContacusBundle">ContacusBundle\Entity</argument>
           <argument key="LocationBundle">LocationBundle\Entity</argument>
           <argument key="ADesignsCalendarBundle">ADesigns\CalendarBundle\Entity</argument>
+          <argument key="EvenementBundle">EvenementBundle\Entity</argument>
         </argument>
       </call>
       <call method="setMetadataCacheImpl">
@@ -5152,6 +5227,7 @@
         <argument>C:\xampp\htdocs\Pidev-web\src\ContacusBundle\Entity</argument>
         <argument>C:\xampp\htdocs\Pidev-web\src\LocationBundle\Entity</argument>
         <argument>C:\xampp\htdocs\Pidev-web\vendor\adesigns\calendar-bundle\ADesigns\CalendarBundle\Entity</argument>
+        <argument>C:\xampp\htdocs\Pidev-web\src\EvenementBundle\Entity</argument>
       </argument>
     </service>
     <service id="doctrine.orm.default_metadata_driver" class="Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain" public="false">
@@ -5182,6 +5258,10 @@
       <call method="addDriver">
         <argument type="service" id="doctrine.orm.default_annotation_metadata_driver"/>
         <argument>ADesigns\CalendarBundle\Entity</argument>
+      </call>
+      <call method="addDriver">
+        <argument type="service" id="doctrine.orm.default_annotation_metadata_driver"/>
+        <argument>EvenementBundle\Entity</argument>
       </call>
       <call method="addDriver">
         <argument type="service">
@@ -5364,7 +5444,7 @@
     <service id="fos_user.mailer.default" class="FOS\UserBundle\Mailer\Mailer" public="false">
       <tag name="fos_user.requires_swift"/>
       <argument type="service" id="swiftmailer.mailer.default"/>
-      <argument type="service" id="router.default"/>
+      <argument type="service" id="weglot_translate.routing.router"/>
       <argument type="service" id="templating.engine.twig"/>
       <argument type="collection">
         <argument key="confirmation.template">@FOSUser/Registration/email.txt.twig</argument>
@@ -5378,7 +5458,7 @@
     <service id="fos_user.mailer.twig_swift" class="FOS\UserBundle\Mailer\TwigSwiftMailer" public="false">
       <tag name="fos_user.requires_swift"/>
       <argument type="service" id="swiftmailer.mailer.default"/>
-      <argument type="service" id="router.default"/>
+      <argument type="service" id="weglot_translate.routing.router"/>
       <argument type="service" id="twig"/>
       <argument type="collection">
         <argument key="template" type="collection">
@@ -5518,7 +5598,7 @@
     </service>
     <service id="fos_user.listener.resetting" class="FOS\UserBundle\EventListener\ResettingListener">
       <tag name="kernel.event_subscriber"/>
-      <argument type="service" id="router.default"/>
+      <argument type="service" id="weglot_translate.routing.router"/>
       <argument>86400</argument>
     </service>
     <service id="fos_user.resetting.controller" class="FOS\UserBundle\Controller\ResettingController" public="true">
@@ -5566,7 +5646,7 @@
       </argument>
     </service>
     <service id="knp_paginator.helper.processor" class="Knp\Bundle\PaginatorBundle\Helper\Processor">
-      <argument type="service" id="router.default"/>
+      <argument type="service" id="weglot_translate.routing.router"/>
       <argument type="service" id="translator.data_collector"/>
     </service>
     <service id="knp_paginator.twig.extension.pagination" class="Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension">
@@ -5813,7 +5893,7 @@
     <service id="fos_ck_editor.installer" class="FOS\CKEditorBundle\Installer\CKEditorInstaller"/>
     <service id="fos_ck_editor.renderer" class="FOS\CKEditorBundle\Renderer\CKEditorRenderer">
       <argument type="service" id="fos_ck_editor.builder.json_builder"/>
-      <argument type="service" id="router.default"/>
+      <argument type="service" id="weglot_translate.routing.router"/>
       <argument type="service" id="assets.packages" on-invalid="null"/>
       <argument type="service" id="request_stack"/>
       <argument type="expression">container.has('twig') ? container.get('twig') : container.get('templating')</argument>
@@ -5891,7 +5971,7 @@
     <service id="endroid.qrcode.twig.extension" class="Endroid\QrCode\Twig\Extension\QrCodeExtension">
       <tag name="twig.extension"/>
       <argument type="service" id="endroid.qrcode.factory"/>
-      <argument type="service" id="router.default"/>
+      <argument type="service" id="weglot_translate.routing.router"/>
     </service>
     <service id="endroid.qrcode.writer_registry" class="Endroid\QrCode\WriterRegistry">
       <call method="addWriter">
@@ -5931,7 +6011,7 @@
       <tag name="endroid.qrcode.writer"/>
     </service>
     <service id="fos_js_routing.extractor" class="FOS\JsRoutingBundle\Extractor\ExposedRoutesExtractor" public="true">
-      <argument type="service" id="router.default"/>
+      <argument type="service" id="weglot_translate.routing.router"/>
       <argument type="collection"/>
       <argument>C:\xampp\htdocs\Pidev-web\var\cache\dev</argument>
       <argument>%kernel.bundles%</argument>
@@ -5949,7 +6029,7 @@
     <service id="fos_js_routing.router_debug_exposed_command" class="FOS\JsRoutingBundle\Command\RouterDebugExposedCommand">
       <tag name="console.command"/>
       <argument type="service" id="fos_js_routing.extractor"/>
-      <argument type="service" id="router.default"/>
+      <argument type="service" id="weglot_translate.routing.router"/>
       <call method="setName">
         <argument>fos:js-routing:debug</argument>
       </call>
@@ -5987,7 +6067,7 @@
       <argument>%gregwar_captcha.config%</argument>
     </service>
     <service id="gregwar_captcha.generator" class="Gregwar\CaptchaBundle\Generator\CaptchaGenerator" public="true">
-      <argument type="service" id="router.default"/>
+      <argument type="service" id="weglot_translate.routing.router"/>
       <argument type="service" id="gregwar_captcha.captcha_builder"/>
       <argument type="service" id="gregwar_captcha.phrase_builder"/>
       <argument type="service" id="gregwar_captcha.image_file_handler"/>
@@ -6000,6 +6080,84 @@
     </service>
     <service id="gregwar_captcha.captcha_builder" class="Gregwar\Captcha\CaptchaBuilder" public="true"/>
     <service id="gregwar_captcha.phrase_builder" class="Gregwar\Captcha\PhraseBuilder" public="true"/>
+    <service id="weglot_translate.library.client" class="Weglot\Client\Client">
+      <argument>wg_97da7244e1d41e4bb79d3bd92880a0ce7</argument>
+      <argument type="collection">
+        <argument key="host">https://api.weglot.com</argument>
+      </argument>
+      <call method="setCacheItemPool">
+        <argument type="service" id="weglot_translate.cache"/>
+      </call>
+    </service>
+    <service id="weglot_translate.cache" class="Symfony\Component\Cache\Adapter\TraceableAdapter" public="false">
+      <tag name="cache.pool"/>
+      <tag name="kernel.reset" method="reset"/>
+      <argument type="service" id="weglot_translate.cache.recorder_inner"/>
+    </service>
+    <service id="weglot_translate.library.config_provider" class="Weglot\Parser\ConfigProvider\ServerConfigProvider"/>
+    <service id="weglot_translate.library.parser" class="Weglot\Parser\Parser">
+      <argument type="service" id="weglot_translate.library.client"/>
+      <argument type="service" id="weglot_translate.library.config_provider"/>
+      <argument type="collection"/>
+    </service>
+    <service id="weglot_translate.library.languages_endpoint" class="Weglot\Client\Endpoint\Languages">
+      <argument type="service" id="weglot_translate.library.client"/>
+    </service>
+    <service id="weglot_translate.listener.request" class="Weglot\TranslateBundle\Listener\RequestListener">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="container.hot_path"/>
+      <argument type="service" id="weglot_translate.library.parser"/>
+      <argument>%weglot.destination_languages%</argument>
+    </service>
+    <service id="weglot_translate.routing.loader" class="Weglot\TranslateBundle\Routing\Loader" public="false">
+      <argument type="service" id="weglot_translate.routing.loader.inner"/>
+      <argument>%weglot.destination_languages%</argument>
+      <argument>en</argument>
+    </service>
+    <service id="weglot_translate.routing.router" class="Weglot\TranslateBundle\Routing\Router" public="false">
+      <argument type="service" id="service_container"/>
+      <argument>C:\xampp\htdocs\Pidev-web/app/config/routing_dev.yml</argument>
+      <argument type="collection">
+        <argument key="cache_dir">C:\xampp\htdocs\Pidev-web\var\cache\dev</argument>
+        <argument key="debug">true</argument>
+        <argument key="generator_class">Symfony\Component\Routing\Generator\UrlGenerator</argument>
+        <argument key="generator_base_class">Symfony\Component\Routing\Generator\UrlGenerator</argument>
+        <argument key="generator_dumper_class">Symfony\Component\Routing\Generator\Dumper\PhpGeneratorDumper</argument>
+        <argument key="generator_cache_class">appDevDebugProjectContainerUrlGenerator</argument>
+        <argument key="matcher_class">Symfony\Bundle\FrameworkBundle\Routing\RedirectableUrlMatcher</argument>
+        <argument key="matcher_base_class">Symfony\Bundle\FrameworkBundle\Routing\RedirectableUrlMatcher</argument>
+        <argument key="matcher_dumper_class">Symfony\Component\Routing\Matcher\Dumper\PhpMatcherDumper</argument>
+        <argument key="matcher_cache_class">appDevDebugProjectContainerUrlMatcher</argument>
+        <argument key="strict_requirements">true</argument>
+      </argument>
+      <argument type="service" id="router.request_context" on-invalid="ignore"/>
+      <call method="setConfigCacheFactory">
+        <argument type="service" id="config_cache_factory"/>
+      </call>
+      <call method="setDefaultLocale">
+        <argument>en</argument>
+      </call>
+      <call method="setRequestStack">
+        <argument type="service" id="request_stack"/>
+      </call>
+    </service>
+    <service id="weglot_translate.extension.weglot_button" class="Weglot\TranslateBundle\Twig\Extensions\Button">
+      <tag name="twig.extension"/>
+      <argument>en</argument>
+      <argument>%weglot.destination_languages%</argument>
+      <argument type="service" id="weglot_translate.library.languages_endpoint"/>
+    </service>
+    <service id="weglot_translate.extension.language_code" class="Weglot\TranslateBundle\Twig\Extensions\LanguageCode">
+      <tag name="twig.extension"/>
+      <argument type="service" id="weglot_translate.library.languages_endpoint"/>
+    </service>
+    <service id="weglot_translate.extension.href_lang" class="Weglot\TranslateBundle\Twig\Extensions\HrefLang">
+      <tag name="twig.extension"/>
+      <argument>en</argument>
+      <argument>%weglot.destination_languages%</argument>
+      <argument type="service" id="request_stack"/>
+      <argument type="service" id="weglot_translate.routing.router"/>
+    </service>
     <service id="twig.extension.dump" class="Symfony\Bridge\Twig\Extension\DumpExtension" public="false">
       <tag name="twig.extension"/>
       <argument type="service" id="var_dumper.cloner"/>
@@ -6057,7 +6215,7 @@
     </service>
     <service id="1_NonceGenerator~alp6f52" class="Symfony\Bundle\WebProfilerBundle\Csp\NonceGenerator" public="false"/>
     <service id="web_profiler.controller.profiler" class="Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController" public="true">
-      <argument type="service" id="router.default" on-invalid="null"/>
+      <argument type="service" id="weglot_translate.routing.router" on-invalid="null"/>
       <argument type="service" id="profiler" on-invalid="null"/>
       <argument type="service" id="twig"/>
       <argument>%data_collector.templates%</argument>
@@ -6068,7 +6226,7 @@
     <service id="web_profiler.controller.router" class="Symfony\Bundle\WebProfilerBundle\Controller\RouterController" public="true">
       <argument type="service" id="profiler" on-invalid="null"/>
       <argument type="service" id="twig"/>
-      <argument type="service" id="router.default" on-invalid="null"/>
+      <argument type="service" id="weglot_translate.routing.router" on-invalid="null"/>
     </service>
     <service id="web_profiler.controller.exception" class="Symfony\Bundle\WebProfilerBundle\Controller\ExceptionController" public="true">
       <argument type="service" id="profiler" on-invalid="null"/>
@@ -6084,7 +6242,7 @@
       <argument type="service" id="2_HtmlDumper~alp6f52"/>
     </service>
     <service id="debug.file_link_formatter.url_format" class="string" public="false">
-      <argument type="service" id="router.default"/>
+      <argument type="service" id="weglot_translate.routing.router"/>
       <argument>_profiler_open_file</argument>
       <argument>?file=%%f&amp;line=%%l#line%%l</argument>
       <factory class="Symfony\Component\HttpKernel\Debug\FileLinkFormatter" method="generateUrlFormat"/>
@@ -6096,7 +6254,7 @@
       <argument>false</argument>
       <argument>2</argument>
       <argument>bottom</argument>
-      <argument type="service" id="router.default" on-invalid="ignore"/>
+      <argument type="service" id="weglot_translate.routing.router" on-invalid="ignore"/>
       <argument>^/((index|app(_[\w]+)?)\.php/)?_wdt</argument>
       <argument type="service" id="web_profiler.csp.handler"/>
     </service>
@@ -6374,7 +6532,7 @@
     <service id="service_locator.lluwcxp" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="router" type="service" id="router.default"/>
+        <argument key="router" type="service" id="weglot_translate.routing.router"/>
       </argument>
     </service>
     <service id="service_locator.lluwcxp.router.cache_warmer" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
@@ -6436,6 +6594,10 @@
       <argument>affirmative</argument>
       <argument>false</argument>
       <argument>true</argument>
+    </service>
+    <service id="weglot_translate.routing.loader.inner" class="Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader" public="false">
+      <argument type="service" id="controller_name_converter"/>
+      <argument type="service" id="routing.resolver"/>
     </service>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <argument type="service" id="service_locator.mavabby"/>
@@ -6599,6 +6761,14 @@
       <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
       <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
     </service>
+    <service id="weglot_translate.cache.recorder_inner" class="Symfony\Component\Cache\Adapter\AdapterInterface" public="false">
+      <argument>nvelqCqrWz</argument>
+      <argument>0</argument>
+      <argument>%container.build_id%</argument>
+      <argument>C:\xampp\htdocs\Pidev-web\var\cache\dev/pools</argument>
+      <argument type="service" id="monolog.logger.cache" on-invalid="ignore"/>
+      <factory class="Symfony\Component\Cache\Adapter\AbstractAdapter" method="createSystemCache"/>
+    </service>
     <service id="service_locator.0nzls3h" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6644,11 +6814,11 @@
     <service id="cache.default_memcached_provider" alias="cache_connection.jke6kex" public="false"/>
     <service id="Symfony\Component\HttpKernel\Debug\FileLinkFormatter" alias="debug.file_link_formatter" public="false"/>
     <service id="Symfony\Component\Stopwatch\Stopwatch" alias="debug.stopwatch" public="false"/>
-    <service id="router" alias="router.default" public="true"/>
-    <service id="Symfony\Component\Routing\RouterInterface" alias="router.default" public="false"/>
-    <service id="Symfony\Component\Routing\Generator\UrlGeneratorInterface" alias="router.default" public="false"/>
-    <service id="Symfony\Component\Routing\Matcher\UrlMatcherInterface" alias="router.default" public="false"/>
-    <service id="Symfony\Component\Routing\RequestContextAwareInterface" alias="router.default" public="false"/>
+    <service id="router" alias="weglot_translate.routing.router"/>
+    <service id="Symfony\Component\Routing\RouterInterface" alias="weglot_translate.routing.router" public="false"/>
+    <service id="Symfony\Component\Routing\Generator\UrlGeneratorInterface" alias="weglot_translate.routing.router" public="false"/>
+    <service id="Symfony\Component\Routing\Matcher\UrlMatcherInterface" alias="weglot_translate.routing.router" public="false"/>
+    <service id="Symfony\Component\Routing\RequestContextAwareInterface" alias="weglot_translate.routing.router" public="false"/>
     <service id="Symfony\Component\Routing\RequestContext" alias="router.request_context" public="false"/>
     <service id="annotation_reader" alias="annotations.cached_reader"/>
     <service id="Doctrine\Common\Annotations\Reader" alias="annotations.cached_reader" public="false"/>
@@ -6721,7 +6891,7 @@
     <service id="vich_uploader.metadata.cache" alias="vich_uploader.metadata.cache.file_cache" public="false"/>
     <service id="Knp\Snappy\Pdf" alias="knp_snappy.pdf"/>
     <service id="Knp\Snappy\Image" alias="knp_snappy.image"/>
-    <service id="fos_js_routing.router" alias="router.default" public="false"/>
+    <service id="fos_js_routing.router" alias="weglot_translate.routing.router" public="false"/>
     <service id="Symfony\Component\Templating\EngineInterface" alias="templating.engine.twig" public="false"/>
     <service id="Symfony\Bundle\FrameworkBundle\Templating\EngineInterface" alias="templating.engine.twig" public="false"/>
     <service id="twig.loader" alias="twig.loader.filesystem"/>
@@ -6734,6 +6904,7 @@
     <service id="controller_resolver" alias="debug.controller_resolver" public="false"/>
     <service id="argument_resolver" alias="debug.argument_resolver" public="false"/>
     <service id="security.access.decision_manager" alias="debug.security.access.decision_manager" public="false"/>
+    <service id="routing.loader" alias="weglot_translate.routing.loader" public="true"/>
     <service id="console.command.doctrine_bundle_doctrinecachebundle_command_containscommand" alias="doctrine_cache.contains_command" public="true"/>
     <service id="console.command.doctrine_bundle_doctrinecachebundle_command_deletecommand" alias="doctrine_cache.delete_command" public="true"/>
     <service id="console.command.doctrine_bundle_doctrinecachebundle_command_flushcommand" alias="doctrine_cache.flush_command" public="true"/>

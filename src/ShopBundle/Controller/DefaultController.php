@@ -19,6 +19,7 @@ class DefaultController extends Controller
 
     public function indexAction(Request $request)
     {
+//        clear code after
 
         $products = $this->getDoctrine()->getRepository('ShopBundle:Produit')->findAll();
         $paginator = $this->get('knp_paginator');
@@ -123,5 +124,16 @@ class DefaultController extends Controller
             return $this->redirectToRoute('fos_user_security_login');
         }
     }
+
+    public function myorderAction()
+    {
+        if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $user = $this->container->get('security.token_storage')->getToken()->getUser();
+            $panelist = $this->getDoctrine()->getRepository('ShopBundle:Order')->findByUser($user);
+            return $this->render('@Shop/Default/orders.html.twig', array('orders' => $panelist,'total'=>0));
+        }
+        return $this->redirectToRoute('home');
+    }
+
 
 }
