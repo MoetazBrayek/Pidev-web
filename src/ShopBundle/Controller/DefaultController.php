@@ -93,11 +93,7 @@ class DefaultController extends Controller
         $count = count($panierlist);
         $nbrrev = count($reviews);
         $total = 0;
-        foreach ($panierlist as $prix) {
 
-            $p = $prix->getPrix();
-            $total = $total + $p;
-        }
         $totlanbrR = 0;
         foreach ($reviews as $rating) {
 
