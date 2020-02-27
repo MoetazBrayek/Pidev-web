@@ -19,6 +19,7 @@ class DefaultController extends Controller
 
     public function indexAction(Request $request)
     {
+        
 //        clear code after
 
         $products = $this->getDoctrine()->getRepository('ShopBundle:Produit')->findAll();
