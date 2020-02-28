@@ -17,6 +17,7 @@ class ComposerStaticInit92661ae03afd5c32329d7cc77ceb7903
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         'bd9634f2d41831496de0d3dfe4c94881' => __DIR__ . '/..' . '/symfony/polyfill-php56/bootstrap.php',
         '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
+        '6c200413eed8aeea54dbaf934a31b127' => __DIR__ . '/..' . '/weglot/simplehtmldom/src/simple_html_dom.php',
         'a9ed0d27b5a698798a89181429f162c5' => __DIR__ . '/..' . '/khanamiryan/qrcode-detector-decoder/lib/Common/customFunctions.php',
         '719971e375036615a0685b6fb054583d' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php',
     );
@@ -25,6 +26,11 @@ class ComposerStaticInit92661ae03afd5c32329d7cc77ceb7903
         'Z' => 
         array (
             'Zxing\\' => 6,
+        ),
+        'W' => 
+        array (
+            'Weglot\\TranslateBundle\\' => 23,
+            'Weglot\\' => 7,
         ),
         'V' => 
         array (
@@ -124,6 +130,14 @@ class ComposerStaticInit92661ae03afd5c32329d7cc77ceb7903
         'Zxing\\' => 
         array (
             0 => __DIR__ . '/..' . '/khanamiryan/qrcode-detector-decoder/lib',
+        ),
+        'Weglot\\TranslateBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/weglot/translate-bundle',
+        ),
+        'Weglot\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/weglot/weglot-php/src',
         ),
         'Vich\\UploaderBundle\\' => 
         array (
@@ -353,6 +367,10 @@ class ComposerStaticInit92661ae03afd5c32329d7cc77ceb7903
         ),
         'S' => 
         array (
+            'SimpleHtmlDom' => 
+            array (
+                0 => __DIR__ . '/..' . '/weglot/simplehtmldom/src',
+            ),
             'SBC\\NotificationsBundle' => 
             array (
                 0 => __DIR__ . '/..' . '/mrad/notifications-bundle',

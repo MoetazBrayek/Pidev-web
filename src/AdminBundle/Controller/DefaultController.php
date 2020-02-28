@@ -12,9 +12,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Twilio\Exceptions\ConfigurationException;
 use Twilio\Exceptions\TwilioException;
 use Twilio\Rest\Client;
 
@@ -52,11 +54,6 @@ class DefaultController extends Controller
             'form' => $form->createView(),
         ));
     }
-
-    /**
-     * Displays a form to edit an existing blog entity.
-     *
-     */
     public function editBlogAction(Request $request, Blog $blog)
     {
         $editForm = $this->createForm('BlogBundle\Form\BlogType', $blog);
@@ -73,9 +70,6 @@ class DefaultController extends Controller
             'form' => $editForm->createView(),
         ));
     }
-
-
-
     public function AfficherUserAction(Request $request){
 
         $todos = $this->getDoctrine()
@@ -111,7 +105,6 @@ class DefaultController extends Controller
         ));
 
     }
-
     public function AfficherMsgAction(){
 
         $todos = $this->getDoctrine()
@@ -140,7 +133,6 @@ class DefaultController extends Controller
         ));
 
     }
-
     public function ConfirmContractAction($id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -160,7 +152,10 @@ class DefaultController extends Controller
         $account_sid = 'AC7c27b5ff7f1814c0e28ba26a431b376d';
         $auth_token = '2fb29e88f4b292b2d4308928cf316aab';
         $twilio_number = "+16084722458";
-        $client = new Client($account_sid, $auth_token);
+        try {
+            $client = new Client($account_sid, $auth_token);
+        } catch (ConfigurationException $e) {
+        }
         try {
             $client->messages->create(
             // Where to send a text message (your cell phone?)
@@ -171,15 +166,12 @@ class DefaultController extends Controller
             );
         } catch (TwilioException $e) {
             echo ('error');
-        } catch (TwilioException $e) {
-            echo ('error');
-
         }
 
         return $this->redirectToRoute('affichecontract');
 
     }
-        public function StatusAction($id){
+    public function StatusAction($id){
         $em = $this->getDoctrine()->getManager();
 
         $todos = $this->getDoctrine()
@@ -198,8 +190,6 @@ class DefaultController extends Controller
         }
           return  $this->redirectToRoute('admin_users');
     }
-
-
     public function MsgDetaisAction($id, Request $request){
 
         $subscription_key = "7b565b621d7a47bdb1fcf4cf2389b4fb";
@@ -225,7 +215,6 @@ class DefaultController extends Controller
         ));
 
     }
-
     function GetSentiment ($host, $key, $data) {
         // Make sure all text is UTF-8 encoded.
         foreach ($data as &$item) {
@@ -248,17 +237,10 @@ class DefaultController extends Controller
         $result = file_get_contents ($host , false, $context);
         return $result;
     }
-
-
-
-
-
     public function edit_profileAction(){
         return $this->render('AdminBundle:Default:edit_profile.html.twig');
 
     }
-
-
     public function newCatgoriesAction(Request $request)
     {
         $catg = new Categories();
@@ -278,26 +260,6 @@ class DefaultController extends Controller
             'form' => $form->createView(),
         ));
     }
-    public function newCatgoriesShopAction(Request $request)
-    {
-        $catg = new Category();
-        $form = $this->createForm('ShopBundle\Form\CategoryType', $catg);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-
-            $em->persist($catg);
-
-            $em->flush();
-
-        }
-
-        return $this->render('AdminBundle:Default:CatgoriesShop.html.twig', array(
-            'form' => $form->createView(),
-        ));
-    }
-
     public function RemoveAction($id, Request $request){
         $sn = $this->getDoctrine()->getManager();
         $todo = $sn->getRepository('BlogBundle:Blog')->find($id);
@@ -310,7 +272,7 @@ class DefaultController extends Controller
 
 
 
-    ///////this is Product , Panel Admin ///////
+    /////// Shop , Panel Admin ///////
 
 
     public function RemoveProdAction($id, Request $request){
@@ -322,7 +284,53 @@ class DefaultController extends Controller
         return $this->redirectToRoute('all_produits');
 
     }
+    public function acceptorderAction($id){
 
+        if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $sn = $this->getDoctrine()->getManager();
+            $order = $sn->getRepository('ShopBundle:Order')->find($id);
+            $order->setEtat('Confirmed');
+            $sn->persist($order);
+            $sn->flush();
+            $account_sid = 'AC7c27b5ff7f1814c0e28ba26a431b376d';
+            $auth_token = '2fb29e88f4b292b2d4308928cf316aab';
+            $twilio_number = "+16084722458";
+            $client = new Client($account_sid, $auth_token);
+            try {
+                $client->messages->create(
+                // Where to send a text message (your cell phone?)
+                    '+21658804719',
+                    array(
+                        'from' => $twilio_number,
+                        'body' => 'Your Order Id : '.$order->getId().' Has Been SHipped '
+                ));
+            } catch (TwilioException $e) {
+                echo ('error');
+            }
+        }
+        else{
+            return $this->redirectToRoute('fos_user_security_login');
+        }
+        return $this->redirectToRoute('afficheorders');
+
+    }
+    public function declinedorderAction($id){
+
+        if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $sn = $this->getDoctrine()->getManager();
+            $order = $sn->getRepository('ShopBundle:Order')->find($id);
+            $order->setEtat('Declined');
+            $sn->persist($order);
+            $sn->flush();
+
+            return $this->redirectToRoute('afficheorders');
+        }
+        else{
+            return $this->redirectToRoute('fos_user_security_login');
+        }
+
+
+    }
     public function AfficherProductsAction(Request $request){
 
         $allprod = $this->getDoctrine()
@@ -341,7 +349,24 @@ class DefaultController extends Controller
         ));
 
     }
+    public function AfficherOrdersAction(Request $request){
 
+        $allprod = $this->getDoctrine()
+            ->getRepository('ShopBundle:Order')
+            ->findAll();
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $allprod,
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
+        );
+
+        return $this->render('AdminBundle:Default:Orders.html.twig', array(
+
+            'ordoers'=>$pagination
+        ));
+
+    }
     public function addProdctAction(Request $request)
     {
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
@@ -423,7 +448,6 @@ class DefaultController extends Controller
 
         ));
     }
-
     public function editProdctAction($id, Request $request)
     {
         $produit = $this->getDoctrine()
@@ -442,7 +466,7 @@ class DefaultController extends Controller
             ->add('nom', TextType::class, array('attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
             ->add('description', TextareaType::class, array('attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
             ->add('quantity', NumberType::class, array('attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
-
+            ->add('imageId', FileType::class, array('data_class' => null))
             ->add('prix', NumberType::class, array('attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
             ->add('category', EntityType::class, [
                 // looks for choices from this entity
@@ -452,6 +476,21 @@ class DefaultController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var UploadedFile $file */
+            $file = $produit->getImageId();
+
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+
+            // Move the file to the directory where brochures are stored
+
+            $file->move(
+                $this->getParameter('images_shop'),
+                $fileName
+            );
+
+
+
 
 
             $nom = $form['nom']->getData();
@@ -464,13 +503,14 @@ class DefaultController extends Controller
             $produit->setDescription($description);
             $produit->setQuantity($quantity);
             $produit->setPrix($prix);
-            $produit->setUser($user);
+            $produit->setUtilisateur($user);
             $produit->setCategory($cat);
+            $produit->setImageId($fileName);-
 
             $sn = $this->getDoctrine()->getManager();
             $sn->persist($produit);
             $sn->flush();
-            return $this->redirectToRoute('location_homepage');
+            return $this->redirectToRoute('shop_homepage');
 
         }
         return $this->render('AdminBundle:Default:editprod.html.twig', array(
@@ -480,7 +520,6 @@ class DefaultController extends Controller
         ));
 
     }
-
     public function acceptblogAction($id){
 
         if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -496,6 +535,33 @@ class DefaultController extends Controller
             return $this->redirectToRoute('fos_user_security_login');
         }
 
+
+    }
+    public function newCatgoriesShopAction(Request $request)
+    {
+        $catg = new Category();
+        $form = $this->createForm('ShopBundle\Form\CategoryType', $catg);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($catg);
+
+            $em->flush();
+
+        }
+
+        return $this->render('AdminBundle:Default:CatgoriesShop.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+    public function calendarAction(Request $request){
+
+
+        return $this->render('AdminBundle:Default:calendar.html.twig', array(
+
+        ));
 
     }
 }

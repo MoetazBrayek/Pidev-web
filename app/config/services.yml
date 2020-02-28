@@ -16,7 +16,10 @@ services:
         # this means you cannot fetch services directly from the container via $container->get()
         # if you need to do this, you can override this setting on individual services
         public: false
-
+    evenement_bundle.service.listener:
+        class: EvenementBundle\Listener\LoadDataListener
+        tags:
+        - { name: 'kernel.event_listener', event: 'fullcalendar.set_data', method: loadData }
     # makes classes in src/AppBundle available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     AppBundle\:

@@ -19,8 +19,9 @@ checkout:
 deletech:
     path:     /delete/{id}
     defaults: { _controller: ShopBundle:Panier:deletech }
-
 orders:
     path:     /orders/{total}
     defaults: { _controller: ShopBundle:Panier:order }
-
+myorder:
+    path:     /myorder/
+    defaults: { _controller: ShopBundle:Default:myorder }

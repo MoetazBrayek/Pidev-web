@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
+    'SimpleHtmlDom' => array($vendorDir . '/weglot/simplehtmldom/src'),
     'SBC\\NotificationsBundle' => array($vendorDir . '/mrad/notifications-bundle'),
     'Nomaya\\SocialBundle\\' => array($vendorDir . '/nomaya/social-bundle'),
     'Metadata\\' => array($vendorDir . '/jms/metadata/src'),

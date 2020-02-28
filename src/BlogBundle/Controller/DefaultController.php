@@ -121,7 +121,7 @@ class DefaultController extends Controller
         $category = $em->getRepository('BlogBundle:Categories')->findAll();
         $likeornotttt = $em->getRepository('BlogBundle:BlogLike')->findby(array('blog'=>$post,'user'=>$user));
 
-        return $this->render('BlogBundle:Default:show.html.twig', array(
+        return $this->render('BlogBundle:Default:showback.html.twig', array(
             'blog' => $blog,
             'delete_form' => $deleteForm->createView(),
             'numberofcomments' => $numberofcomments,

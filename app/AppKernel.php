@@ -33,10 +33,10 @@ class AppKernel extends Kernel
             new Endroid\QrCode\Bundle\QrCodeBundle\EndroidQrCodeBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new ADesigns\CalendarBundle\ADesignsCalendarBundle(),
-            new AncaRebeca\FullCalendarBundle\FullCalendarBundle(),
             new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
-
-        ];
+            new Weglot\TranslateBundle\WeglotTranslateBundle(),
+            new EvenementBundle\EvenementBundle(),
+            new AncaRebeca\FullCalendarBundle\FullCalendarBundle() ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();

@@ -3,6 +3,34 @@
 
 <!-- Mirrored from xvelopers.com/demos/html/paper-panel/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 01 Feb 2020 17:13:37 GMT -->
 <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#myInput").on("keyup", function() {
+				var value = $(this).val().toLowerCase();
+				$("#myTable tr").filter(function() {
+					$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+				});
+			});
+		});
+	</script>
+	<style>
+		table {
+			font-family: arial, sans-serif;
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		td, th {
+			border: 1px solid #dddddd;
+			text-align: left;
+			padding: 8px;
+		}
+
+		tr:nth-child(even) {
+			background-color: #dddddd;
+		}
+	</style>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
@@ -76,6 +104,8 @@
 						</li>
 						<li><a href="{{ path('addproduct')}}"><i class="icon icon-add"></i>Add product</a>
 						</li>
+						<li><a href="{{ path('afficheorders')}}"><i class="icon icon-add"></i>Orders</a>
+						</li>
 					</ul>
 				</li>
 
@@ -140,7 +170,11 @@
 
 					</ul>
 				</li>
-
+				<li class="treeview">
+					<a href="{{path('calendars')}}">
+						<i class="icon icon-goals-1 amber-text s-18"></i> <span>Events</span>
+						<i class="icon icon-angle-left s-18 pull-right"></i>
+					</a></li>
 
 
 				<li class="treeview">

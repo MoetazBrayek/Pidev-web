@@ -6,6 +6,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
 use SBC\NotificationsBundle\Builder\NotificationBuilder;
 use SBC\NotificationsBundle\Model\NotifiableInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -52,15 +53,18 @@ class Blog implements NotifiableInterface, \JsonSerializable
 
 
 
+
     /**
-     * @var string
+     * @Assert\NotBlank
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
-     * @var string
+    /**
+     * @Assert\NotBlank
+     *
      *
      * @ORM\Column(name="content", type="string", length=255)
      */

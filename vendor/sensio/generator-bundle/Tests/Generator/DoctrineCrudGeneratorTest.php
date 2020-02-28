@@ -24,7 +24,7 @@ class DoctrineCrudGeneratorTest extends GeneratorTest
             'Tests/Controller/PostControllerTest.php',
             'Resources/config/routing/post.yml',
             'Resources/views/post/index.html.twig',
-            'Resources/views/post/show.html.twig',
+            'Resources/views/post/showback.html.twig',
             'Resources/views/post/new.html.twig',
             'Resources/views/post/edit.html.twig',
         );
@@ -61,7 +61,7 @@ class DoctrineCrudGeneratorTest extends GeneratorTest
             'Tests/Controller/PostControllerTest.php',
             'Resources/config/routing/post.xml',
             'Resources/views/post/index.html.twig',
-            'Resources/views/post/show.html.twig',
+            'Resources/views/post/showback.html.twig',
         );
         foreach ($files as $file) {
             $this->assertTrue(file_exists($this->tmpDir.'/'.$file), sprintf('%s has been generated', $file));
@@ -105,7 +105,7 @@ class DoctrineCrudGeneratorTest extends GeneratorTest
             'Controller/PostController.php',
             'Tests/Controller/PostControllerTest.php',
             'Resources/views/post/index.html.twig',
-            'Resources/views/post/show.html.twig',
+            'Resources/views/post/showback.html.twig',
             'Resources/views/post/new.html.twig',
             'Resources/views/post/edit.html.twig',
         );
@@ -143,7 +143,7 @@ class DoctrineCrudGeneratorTest extends GeneratorTest
             'Controller/PostController.php',
             'Tests/Controller/PostControllerTest.php',
             'Resources/views/post/index.html.twig',
-            'Resources/views/post/show.html.twig',
+            'Resources/views/post/showback.html.twig',
         );
         foreach ($files as $file) {
             $this->assertTrue(file_exists($this->tmpDir.'/'.$file), sprintf('%s has been generated', $file));
@@ -190,7 +190,7 @@ class DoctrineCrudGeneratorTest extends GeneratorTest
             'Controller/Blog/PostController.php',
             'Tests/Controller/Blog/PostControllerTest.php',
             'Resources/views/blog/post/index.html.twig',
-            'Resources/views/blog/post/show.html.twig',
+            'Resources/views/blog/post/showback.html.twig',
             'Resources/views/blog/post/new.html.twig',
             'Resources/views/blog/post/edit.html.twig',
         );

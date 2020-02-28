@@ -79,3 +79,15 @@ confirmcontrat:
 affichecontract:
     path:     /affichecontract
     defaults: { _controller: "AdminBundle:Default:AfficherContract" }
+afficheorders:
+    path:     /afficheorders
+    defaults: { _controller: "AdminBundle:Default:AfficherOrders" }
+acceptorder:
+    path:     /acceptorder/{id}
+    defaults: { _controller: "AdminBundle:Default:acceptorder" }
+declinedorder:
+    path:     /declinedorder/{id}
+    defaults: { _controller: "AdminBundle:Default:declinedorder" }
+calendars:
+    path:     /calendar
+    defaults: { _controller: "AdminBundle:Default:calendar" }

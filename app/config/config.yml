@@ -149,3 +149,11 @@ knp_snappy:
         enabled:    true
         binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe\""
         options:    []
+weglot_translate:
+    api_key: 'wg_97da7244e1d41e4bb79d3bd92880a0ce7'
+    original_language: 'en'
+    cache: true
+    destination_languages:
+        - 'fr'
+        - 'en'
+        - 'ch'

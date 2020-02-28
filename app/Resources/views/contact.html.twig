@@ -39,22 +39,27 @@
                             <div class="tm-form-inner">
                                 <div class="tm-form-field tm-form-fieldhalf">
                                     <label for="contact-form-name">Name</label>
+                                    {{ form_errors(form.name) }}
                                     {{form_widget(form.name)}}
                                 </div>
                                 <div class="tm-form-field tm-form-fieldhalf">
                                     <label for="contact-form-email">Email</label>
+                                    {{ form_errors(form.email) }}
                                     {{form_widget(form.email)}}
                                 </div>
                                 <div class="tm-form-field tm-form-fieldhalf">
                                     <label for="contact-form-phone">Phone</label>
+                                    {{ form_errors(form.phone) }}
                                     {{form_widget(form.phone)}}
                                 </div>
                                 <div class="tm-form-field tm-form-fieldhalf">
                                     <label for="contact-form-subject">Subject</label>
+                                    {{ form_errors(form.subject) }}
                                     {{form_widget(form.subject)}}
                                 </div>
                                 <div class="tm-form-field">
                                     <label for="contact-form-message">Message</label>
+                                    {{ form_errors(form.message) }}
                                     {{form_widget(form.message|raw)}}
                                 </div>
                                 <div class="tm-form-field">

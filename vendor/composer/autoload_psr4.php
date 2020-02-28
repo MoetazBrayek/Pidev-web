@@ -7,6 +7,8 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Zxing\\' => array($vendorDir . '/khanamiryan/qrcode-detector-decoder/lib'),
+    'Weglot\\TranslateBundle\\' => array($vendorDir . '/weglot/translate-bundle'),
+    'Weglot\\' => array($vendorDir . '/weglot/weglot-php/src'),
     'Vich\\UploaderBundle\\' => array($vendorDir . '/vich/uploader-bundle'),
     'Twilio\\' => array($vendorDir . '/twilio/sdk/src/Twilio'),
     'Twig\\' => array($vendorDir . '/twig/twig/src'),

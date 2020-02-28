@@ -237,13 +237,13 @@ class DoctrineCrudGenerator extends Generator
     }
 
     /**
-     * Generates the show.html.twig template in the final bundle.
+     * Generates the showback.html.twig template in the final bundle.
      *
      * @param string $dir The path to the folder that hosts templates in the bundle
      */
     protected function generateShowView($dir)
     {
-        $this->renderFile('crud/views/show.html.twig.twig', $dir.'/show.html.twig', array(
+        $this->renderFile('crud/views/showback.html.twig.twig', $dir.'/showback.html.twig', array(
             'bundle' => $this->bundle->getName(),
             'entity' => $this->entity,
             'entity_singularized' => $this->entitySingularized,
