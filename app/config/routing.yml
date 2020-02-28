@@ -18,6 +18,16 @@ fos_user:
 blog:
     resource: "@BlogBundle/Resources/config/routing.yml"
     prefix:   /Blog
+eventment:
+    resource: "@EvenementBundle/Resources/config/routing.yml"
+    prefix:   /eventment
 location:
     resource: "@LocationBundle/Resources/config/routing.yml"
     prefix:   /location
+EndroidQrCodeBundle:
+    resource: "@EndroidQrCodeBundle/Resources/config/routing.yml"
+    prefix:   /qrcode
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+ancarebeca_fullcalendar:
+    resource: "@FullCalendarBundle/Resources/config/routing.yml"

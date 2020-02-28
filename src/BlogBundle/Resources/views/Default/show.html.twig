@@ -1,5 +1,7 @@
 {% extends "base.html.twig" %}
 {% block content %}
+    <link rel="stylesheet" href="{{ asset('fontawesome/css/all.css') }}">
+
     <div class="tm-breadcrumb-area tm-padding-section bg-grey"
          data-bgimage="{{ asset('Front/') }}assets/images/breadcrumb-bg.jpg"
          data-white-overlay="2">
@@ -39,27 +41,16 @@
                                     <li><i class="ion-android-calendar"></i> {{ blog.dateCreation|date }}</li>
                                     <li><a href="#"><i class="ion-chatbubbles"></i> {{ numberofcomments }}</a></li>
 
-                                    {% if likeornot == '0'%}
-
-                                    <li><a href="{{ path('like_blog',{id:blog.id}) }}"><i class="ion-android-favorite"></i>{{ numlikes }}</a></li>
-                                        {% else %}
-                                            <li><i class="ion-android-favorite"></i>{{ numlikes }}</li>
-
+                                    {% if exist %}
+                                        <li><i class="ion-android-favorite" ></i>( {{ numlikes }} )<a href="{{ path('like_blog',{id:blog.id}) }}">   <i class="fa fa-thumbs-down" style="color: red"></i></a></li>
+                                    {% else %}
+                                        <li><i class="ion-android-favorite" ></i>( {{ numlikes }} )<a href="{{ path('like_blog',{id:blog.id}) }}">   <i class="fa fa-thumbs-up" ></i></a></li>
                                     {% endif %}
-
                                 </ul>
                                 {{ blog.content|raw }}
                             </div>
 
-                            <div class="blogitem-tags">
-                                <h6 class="blogitem-tags-title">Tags:</h6>
-                                <ul>
-                                    <li><a href="blog.html">Fishing</a></li>
-                                    <li><a href="blog.html">Accessories</a></li>
-                                    <li><a href="blog.html">Gear</a></li>
-                                    <li><a href="blog.html">Boat</a></li>
-                                </ul>
-                            </div>
+
 
                             <div class="blogitem-share">
                                 <h6 class="blogitem-share-title">Share With: </h6>
@@ -87,7 +78,8 @@
                                     {% for comment in comments %}
                                         <div class="tm-comment">
                                             <a href="blog.html" class="tm-comment-thumb">
-                                                <img src="{{ asset('usersPictures/' ~ comment.user.imageId) }}" alt="author image">
+                                                <img src="{{ asset('usersPictures/' ~ comment.user.imageId) }}"
+                                                     alt="author image">
                                             </a>
                                             <div class="tm-comment-content">
                                                 <h6 class="tm-comment-authorname"><a
@@ -148,7 +140,7 @@
                                 <h6 class="widget-title">Popular Tags</h6>
                                 <ul>
                                     {% for Cat in Cat %}
-                                        <li><a href="{{ path('ByCategorie',{cat:Cat.name}) }}">{{Cat.name}}</a></li>
+                                        <li><a href="{{ path('ByCategorie',{cat:Cat.name}) }}">{{ Cat.name }}</a></li>
                                     {% endfor %}
                                 </ul>
                             </div>

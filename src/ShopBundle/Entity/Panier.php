@@ -77,7 +77,7 @@ class Panier
     /**
      * @param mixed $user
      */
-    public function setUser($user): void
+    public function setUser($user)
     {
         $this->user = $user;
     }
@@ -93,7 +93,7 @@ class Panier
     /**
      * @param mixed $produitP
      */
-    public function setProduitP($produitP): void
+    public function setProduitP($produitP)
     {
         $this->produitP = $produitP;
     }
@@ -101,7 +101,7 @@ class Panier
     /**
      * @return int
      */
-    public function getQuantite(): int
+    public function getQuantite()
     {
         return $this->quantite;
     }
@@ -109,7 +109,7 @@ class Panier
     /**
      * @param int $quantite
      */
-    public function setQuantite(int $quantite): void
+    public function setQuantite(int $quantite)
     {
         $this->quantite = $quantite;
     }
@@ -117,7 +117,7 @@ class Panier
     /**
      * @return \DateTime
      */
-    public function getDateP(): \DateTime
+    public function getDateP()
     {
         return $this->dateP;
     }
@@ -125,7 +125,7 @@ class Panier
     /**
      * @param \DateTime $dateP
      */
-    public function setDateP(\DateTime $dateP): void
+    public function setDateP(\DateTime $dateP)
     {
         $this->dateP = $dateP;
     }
@@ -133,7 +133,7 @@ class Panier
     /**
      * @return int
      */
-    public function getPrix(): int
+    public function getPrix()
     {
         return $this->prix;
     }
@@ -141,7 +141,7 @@ class Panier
     /**
      * @param int $prix
      */
-    public function setPrix(int $prix): void
+    public function setPrix(int $prix)
     {
         $this->prix = $prix;
     }

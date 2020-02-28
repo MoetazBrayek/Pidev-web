@@ -87,16 +87,8 @@ class DefaultController extends Controller
 
         }
 
-        $panierlist = $this->getDoctrine()->getRepository('ShopBundle:Panier')->findByUser($user);
-        $last = $this->getDoctrine()->getRepository('ShopBundle:Produit')->findBy(array(), array('date' => 'DESC'), 3, 1);
-        $count = count($panierlist);
         $nbrrev = count($reviews);
         $total = 0;
-        foreach ($panierlist as $prix) {
-
-            $p = $prix->getPrix();
-            $total = $total + $p;
-        }
         $totlanbrR = 0;
         foreach ($reviews as $rating) {
 
@@ -111,17 +103,26 @@ class DefaultController extends Controller
         $em->persist($produits);
         $em->flush();
         return $this->render('ShopBundle:Default:details.html.twig',['product' => $produits,
-        'nbrp' => $count, 'panier' => $panierlist,
             'total' => $total,
             'reviews' => $reviews,
             'rev' => $nbrrev,
             'rating' => $res,
-            'lastprod' => $last,
         ]);
         }
         else{
             return $this->redirectToRoute('fos_user_security_login');
         }
     }
+
+    public function myorderAction()
+    {
+        if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $user = $this->container->get('security.token_storage')->getToken()->getUser();
+            $panelist = $this->getDoctrine()->getRepository('ShopBundle:Order')->findByUser($user);
+            return $this->render('@Shop/Default/orders.html.twig', array('orders' => $panelist,'total'=>0));
+        }
+        return $this->redirectToRoute('home');
+    }
+
 
 }

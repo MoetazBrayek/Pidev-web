@@ -64,7 +64,7 @@ class GroupController extends Controller
      */
     public function showAction($groupName)
     {
-        return $this->render('@FOSUser/Group/show.html.twig', array(
+        return $this->render('@FOSUser/Group/showback.html.twig', array(
             'group' => $this->findGroupBy('name', $groupName),
         ));
     }

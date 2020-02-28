@@ -118,6 +118,7 @@ $catalogue = new MessageCatalogue('en', array (
     'fos_user.group.short' => 'The name is too short.',
     'fos_user.group.long' => 'The name is too long.',
     'fos_group.name.already_used' => 'The name is already used.',
+    'Bad code value' => 'Code does not match',
   ),
   'security' => 
   array (
@@ -211,6 +212,10 @@ the Team.
   array (
     'download' => 'Download',
     'form.label.delete' => 'Delete?',
+  ),
+  'gregwar_captcha' => 
+  array (
+    'Renew' => 'Renew',
   ),
 ));
 

@@ -27,7 +27,16 @@ class AppKernel extends Kernel
             new Nomaya\SocialBundle\NomayaSocialBundle(),
             new ContacusBundle\ContacusBundle(),
             new LocationBundle\LocationBundle(),
-        ];
+            new Skies\QRcodeBundle\SkiesQRcodeBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
+            new SBC\NotificationsBundle\NotificationsBundle(),
+            new Endroid\QrCode\Bundle\QrCodeBundle\EndroidQrCodeBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new ADesigns\CalendarBundle\ADesignsCalendarBundle(),
+            new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
+            new Weglot\TranslateBundle\WeglotTranslateBundle(),
+            new EvenementBundle\EvenementBundle(),
+            new AncaRebeca\FullCalendarBundle\FullCalendarBundle() ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();

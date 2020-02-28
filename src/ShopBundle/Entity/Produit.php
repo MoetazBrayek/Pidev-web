@@ -58,14 +58,14 @@ class Produit
     private $stars;
 
     /**
-     * @var float
+     * @var integer
      *
-     * @ORM\Column(name="prix", type="float")
+     * @ORM\Column(name="prix", type="integer")
      */
     private $prix;
 
     /**
-     * @var float
+     * @var integer
      *
      * @ORM\Column(name="quantity", type="integer")
      */
@@ -185,7 +185,7 @@ class Produit
     /**
      * Set prix.
      *
-     * @param float $prix
+     * @param integer $prix
      *
      * @return Produit
      */
@@ -199,7 +199,7 @@ class Produit
     /**
      * Get prix.
      *
-     * @return float
+     * @return integer
      */
     public function getPrix()
     {
@@ -240,7 +240,7 @@ class Produit
     }
 
     /**
-     * @return float
+     * @return integer
      */
     public function getQuantity()
     {
@@ -248,9 +248,9 @@ class Produit
     }
 
     /**
-     * @param float $quantity
+     * @param integer $quantity
      */
-    public function setQuantity(float $quantity)
+    public function setQuantity(integer $quantity)
     {
         $this->quantity = $quantity;
     }

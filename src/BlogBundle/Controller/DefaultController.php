@@ -103,7 +103,10 @@ class DefaultController extends Controller
             $comment = new Comment();
             $comment->setUser($user);
             $comment->setBlog($post);
-            $comment->setContent($request->get('comment-content'));
+
+            $comment->setContent($this->filterwords($request->get('comment-content')));
+
+
             $comment->setPublishdate(new \DateTime('now'));
             $post->setRepliesnumber($post->getRepliesnumber() + 1);
             $em->persist($post);
@@ -113,23 +116,39 @@ class DefaultController extends Controller
         }
         $comments = $em->getRepository('BlogBundle:Comment')->findByBlog($post);
         $numlike = $em->getRepository('BlogBundle:BlogLike')->findByBlog($post);
-        $likeornot = $em->getRepository('BlogBundle:BlogLike')->findByacceptlike($post);
         $numlikes = count($numlike);
         $numberofcomments = count($comments);
-        $likeornotttt = count($likeornot);
         $category = $em->getRepository('BlogBundle:Categories')->findAll();
+        $likeornotttt = $em->getRepository('BlogBundle:BlogLike')->findby(array('blog'=>$post,'user'=>$user));
 
-        return $this->render('BlogBundle:Default:show.html.twig', array(
+        return $this->render('BlogBundle:Default:showback.html.twig', array(
             'blog' => $blog,
             'delete_form' => $deleteForm->createView(),
             'numberofcomments' => $numberofcomments,
             'comments' => $comments,
-            'likeornot' => $likeornotttt,
+            'exist' => $likeornotttt,
             'numlikes'=>$numlikes,
             'arr' => $arr,
             'Cat' => $category
         ));
     }
+    function filterwords($text){
+        $strings = file_get_contents('C:\xampp\htdocs\Pidev-web\web\words.json');
+        $words = json_decode($strings,true);
+        $filterWords = $words;
+
+        $filterCount = sizeof($filterWords);
+        for($i=0; $i<$filterCount; $i++){
+      if ($filterWords[$i]==$text){
+         return "***";
+      }
+
+        }
+        return $text;
+
+    }
+
+
     public function likeBlogAction($id)
     {
         $user = $this->getUser();
@@ -139,35 +158,19 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository('BlogBundle:Blog')->find($id);
 
+        $exist = $em->getRepository('BlogBundle:BlogLike')->findby(array('blog'=>$post,'user'=>$user));
+        if(!$exist){
         $love = new BlogLike();
-
         $love->setUser($user);
-        $love->setAcceptlike(1);
         $post->setLikesnumber($post->getLikesnumber() + 1);
         $love->setBlog($post);
         $em->persist($love);
         $em->flush();
-
-        return $this->redirectToRoute('blog_show', array('id' => $post->getId()));
-    }
-    public function dislikeblogAction($id)
-    {
-        $user = $this->getUser();
-        if ($user == null) {
-            return $this->redirectToRoute('fos_user_security_login');
         }
-        $em = $this->getDoctrine()->getManager();
-        $post = $em->getRepository('BlogBundle:Blog')->find($id);
-
-        $love = new BlogLike();
-
-        $love->setUser($user);
-        $love->setAcceptlike(0);
-        $post->setLikesnumber($post->getLikesnumber() - 1);
-        $love->setBlog($post);
-        $em->persist($love);
-        $em->flush();
-
+        else{
+            $em->remove($exist[0]);
+            $em->flush();
+        }
         return $this->redirectToRoute('blog_show', array('id' => $post->getId()));
     }
     /**
@@ -218,5 +221,7 @@ class DefaultController extends Controller
         }
         return $realEntities;
     }
+
+
 
 }

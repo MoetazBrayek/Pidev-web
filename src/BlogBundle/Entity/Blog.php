@@ -4,6 +4,9 @@ namespace BlogBundle\Entity;
 
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
+use SBC\NotificationsBundle\Builder\NotificationBuilder;
+use SBC\NotificationsBundle\Model\NotifiableInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="BlogBundle\Repository\BlogRepository")
  * * @Vich\Uploadable
  */
-class Blog
+class Blog implements NotifiableInterface, \JsonSerializable
 {
     /**
      * @var int
@@ -50,15 +53,18 @@ class Blog
 
 
 
+
     /**
-     * @var string
+     * @Assert\NotBlank
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
 
     /**
-     * @var string
+    /**
+     * @Assert\NotBlank
+     *
      *
      * @ORM\Column(name="content", type="string", length=255)
      */
@@ -312,6 +318,46 @@ class Blog
     {
         $this->likesnumber = $likesnumber;
     }
+    public function notificationsOnCreate(NotificationBuilder $builder)
+    {
+        $notification = new Notifcation();
+        $notification
+            ->setTitle('New comment')
+            ->setDescription('New comment has been added "'.$this->content.'"')
+            ->setRoute('comment_show')// I suppose you have a show route for your entity
+            ->setParameters(array('id' => $this->id))
+        ;
+        $builder->addNotification($notification);
+
+        return $builder;
+    }
+
+    public function notificationsOnUpdate(NotificationBuilder $builder)
+    {
+        $notification = new Notifcation();
+        $notification
+            ->setTitle('Comment updated')
+            ->setDescription('"'.$this->content.'" has been updated')
+            ->setRoute('comment_show')
+            ->setParameters(array('id' => $this->id))
+        ;
+        $builder->addNotification($notification);
+
+        return $builder;
+    }
+    public function notificationsOnDelete(NotificationBuilder $builder)
+    {
+        // in case you don't want any notification for a special event
+        // you can simply return an empty $builder
+        return $builder;
+    }
+
+
+    function jsonSerialize()
+    {
+        return get_object_vars($this);
+    }
+
 
 
 }
